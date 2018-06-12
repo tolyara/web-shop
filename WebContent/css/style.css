@@ -1,0 +1,66 @@
+
+body {
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+.th_petName:hover, .th_petOwner:hover  {
+    background: grey;
+    cursor: pointer;
+}
+
+.th_petName, .th_petOwner {
+    cursor: pointer;
+}
+
+th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+table {
+    margin: 20px;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+caption {
+    text-align: center;
+    font-size: x-large;
+
+}
+
+.table_head {
+    font-weight: bold;
+}
+
+
+a {
+    margin: 6px;
+}
+
+.link-make-order {
+    margin-left: 50px;
+    padding-bottom: 20px;
+}
+
+.products {
+    float: left;
+    background: lavenderblush;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+.basket {
+    display: inline-block;
+    background: lightyellow;
+    width: auto;
+}
+
+
+
+

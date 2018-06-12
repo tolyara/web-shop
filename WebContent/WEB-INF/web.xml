@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<display-name>WebShop</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--********** Стартовая страница ******************************************** -->
+	<!--************************************************************************** -->
+
+	<servlet>
+		<servlet-name>HomePageServlet</servlet-name>
+		<servlet-class>Servlets.HomePageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HomePageServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!--********** Обзор каталога товаров (пользователь) ************************* -->
+	<!--************************************************************************** -->
+
+	<servlet>
+		<servlet-name>ViewShopServlet</servlet-name>
+		<servlet-class>Servlets.ViewShopServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ViewShopServlet</servlet-name>
+		<url-pattern>/user/view</url-pattern>
+	</servlet-mapping>
+	
+	<!--********** Действия с ресурсами магазина (администратор) ***************** -->
+	<!--************************************************************************** -->
+	
+	<servlet>
+		<servlet-name>ViewAdminPanelServlet</servlet-name>
+		<servlet-class>Servlets.ViewAdminPanelServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ViewAdminPanelServlet</servlet-name>
+		<url-pattern>/admin/view</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
