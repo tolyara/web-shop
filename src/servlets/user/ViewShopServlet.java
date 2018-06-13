@@ -1,7 +1,7 @@
-package Servlets.Admin;
+package servlets.user;
 
-import Service.StorageIdentifier;
-import Storages.Storage;
+import service.StorageIdentifier;
+import storages.Storage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,18 +17,16 @@ import java.util.Set;
  * 
  * @author AnatoliiMelchenko
  */
-public class ViewAdminPanelServlet extends HttpServlet {
+public class ViewShopServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;	
-	private static final String VIEWADMIN_PATH = "/views/admin/ViewAdminPanel.jsp";
-	private final Storage shopWeb = StorageIdentifier.getStorage();
+	private static final String VIEWSHOP_PATH = "/views/User/ViewShopUnautorized.jsp";
+	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("products", shopWeb.getProducts().values());
-//        req.setAttribute("viewpets", getPetsView(shopWeb.getAllPets()));
-//        req.setAttribute("wildAnimals", shopWeb.getWildAnimals());
-        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWADMIN_PATH);
+        req.setAttribute("products", SHOP_WEB.getProducts().values());
+        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_PATH);
         dispatcher.forward(req, resp);
     }
 
@@ -36,7 +34,7 @@ public class ViewAdminPanelServlet extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-        shopWeb.close();
+        SHOP_WEB.close();
     }
 
 }
