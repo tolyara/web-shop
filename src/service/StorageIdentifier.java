@@ -1,8 +1,8 @@
-package Service;
+package service;
 
-import Models.WebShop;
-import Storages.JdbcStorage;
-import Storages.Storage;
+import storages.Storage;
+import storages.WebShop;
+import storages.WebShopJDBC;
 
 /**
  * Данный класс нужен для определения типа хранилища данных.
@@ -11,14 +11,14 @@ import Storages.Storage;
 
 public class StorageIdentifier {
 
-    private static String storageType = "memory";
+    private static String storageType = "jdbc";
 
     public static Storage getStorage() {
         switch (storageType) {
             case "memory":
                 return WebShop.getInstance(); 
             case "jdbc":
-                return new JdbcStorage(); 
+                return new WebShopJDBC(); 
             default:
                 throw new RuntimeException("Ошибка! Тип хранилища не определен.");
         }

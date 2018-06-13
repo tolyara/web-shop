@@ -1,6 +1,4 @@
-package Storages;
-
-import Models.Product;
+package storages;
 
 import java.util.AbstractMap;
 import java.util.Collection;
@@ -8,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import models.Product;
 
 /**
  * Интерфейс определяет основные методы для работы с хранилищем данных в

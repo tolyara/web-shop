@@ -1,10 +1,10 @@
-package Storages;
+package storages;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import Models.Product;
+import models.Product;
 
 /**
  * Класс описывает работу интернет-магазина товаров, реализованного в виде
@@ -16,7 +16,7 @@ import Models.Product;
  * @author Anatolii Melchenko
  */
 
-public class WebShop implements Storages.Storage {
+public class WebShop implements storages.Storage {
 
 	/*
 	 * Каталог товаров

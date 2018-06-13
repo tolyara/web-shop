@@ -1,7 +1,7 @@
-package Storages;
+package storages;
 
-import Models.Product;
-import Service.Settings;
+import models.Product;
+import service.Settings;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebShopJDBC implements Storage {
 
 	private Connection connection;
-	private static final String QUERY_SELECT_ALL_PRODUCTS = "select * from products order by product_id";
+	private static final String QUERY_SELECT_ALL_PRODUCTS = "select * from products order by product_id;";
 	private static final String QUERY_INSERT_PRODUCT = "insert into products (product_name) values (?);";
 	private static final String QUERY_UPDATE_PRODUCT = "update products as products set product_name = ? where products.product_id = ?;";
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";

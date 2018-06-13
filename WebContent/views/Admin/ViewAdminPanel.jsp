@@ -4,12 +4,14 @@
 
 <html>
 <head>
-    <title> Обзор магазина </title>
+    <title> Панель управления </title>
     <style>
         <%@include file='/css/style.css' %>
     </style>
 </head>
-<body>
+<body class="admin">
+
+<h1>Панель управления</h1>
 
                 <%--Каталог товаров--%>
 
@@ -27,11 +29,14 @@
             <td>${product.id}</td>
             <td>${product.productName}</td>   
             <td>
-                <a href="${pageContext.servletContext.contextPath}/basket/add?ProductID=${product.id}"> Добавить в корзину </a>
+                <a href="${pageContext.servletContext.contextPath}/admin/edit-product?id=${product.id}"> Редактировать </a>
+                <a href="${pageContext.servletContext.contextPath}/admin/delete-product?id=${product.id}"> Удалить </a><br>
             </td>
         </tr>
     </c:forEach>
 </table>
+<a href="${pageContext.servletContext.contextPath}/views/Admin/CreateProduct.jsp"> Добавить товар </a> <br>
+<p>  </p>
 </div>
 
                     <%--Корзина--%>

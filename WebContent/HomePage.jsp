@@ -9,7 +9,7 @@
 
 	<h1>Добро пожаловать в web-приложение "Интернет-магазин"!</h1>
 	<a href="${pageContext.servletContext.contextPath}/user/view">
-		Перейти к просмотру товаров в роли пользователя </a>
+		Перейти к просмотру товаров в роли пользователя </a> <br>
 	<a href="${pageContext.servletContext.contextPath}/admin/view">
 		Перейти к управлению в роли администратора </a>
 
