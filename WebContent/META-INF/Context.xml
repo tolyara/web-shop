@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/tomcat_connection_pool"
+             auth="Container"
+             type="javax.sql.DataSource"
+             username="postgres"
+             password="123321"
+             driverClassName="org.postgresql.Driver"
+             url="jdbc:postgresql://127.0.0.1:5432/WebShop?autoReconnect=true"
+             validationQuery="select 1"
+             maxActive="10"
+             maxWait="5000"
+             maxIdle="4"/>
+ 
+</Context>

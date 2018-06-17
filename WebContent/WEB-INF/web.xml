@@ -21,7 +21,7 @@
 
 	<servlet>
 		<servlet-name>HomePageServlet</servlet-name>
-		<servlet-class>Servlets.HomePageServlet</servlet-class>
+		<servlet-class>servlets.HomePageServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -34,7 +34,7 @@
 
 	<servlet>
 		<servlet-name>ViewShopServlet</servlet-name>
-		<servlet-class>Servlets.User.ViewShopServlet</servlet-class>
+		<servlet-class>servlets.user.ViewShopServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -47,7 +47,7 @@
 	
 	<servlet>
 		<servlet-name>ViewAdminPanelServlet</servlet-name>
-		<servlet-class>Servlets.Admin.ViewAdminPanelServlet</servlet-class>
+		<servlet-class>servlets.admin.ViewAdminPanelServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -57,7 +57,7 @@
 	
 	    <servlet>
         <servlet-name>CreateProductServlet</servlet-name>
-        <servlet-class>Servlets.Admin.CreateProductServlet</servlet-class>
+        <servlet-class>servlets.admin.CreateProductServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>EditProductServlet</servlet-name>
-        <servlet-class>Servlets.Admin.EditProductServlet</servlet-class>
+        <servlet-class>servlets.admin.EditProductServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -77,7 +77,7 @@
 
     <servlet>
         <servlet-name>DeleteProductServlet</servlet-name>
-        <servlet-class>Servlets.Admin.DeleteProductServlet</servlet-class>
+        <servlet-class>servlets.admin.DeleteProductServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

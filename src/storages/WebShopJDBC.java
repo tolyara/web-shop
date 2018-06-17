@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Класс описывает работу клиники, где в качестве хранилища используется базы
- * данных. В качестве СУБД использую PosgreSQL 10 (PgAdmin 4).
+ * данных. В качестве СУБД используется PosgreSQL 10 (PgAdmin 4).
  * 
  * @author tolyara
  * @since 12.11.2017
@@ -28,7 +28,25 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_UPDATE_PRODUCT = "update products as products set product_name = ? where products.product_id = ?;";
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";
 
+	/*
+	 * Default constructor is used if we want to use JDBC connection through Tomcat connection pool.
+	 */
 	public WebShopJDBC() {
+//			Class.forName("org.postgresql.Driver");
+			this.connection = ConnectionPool.getInstance().getConnection();
+			// } catch (SQLException e) {
+			// throw new IllegalStateException(e);
+		
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+	}
+
+	/*
+	 * This constructor is used if we want to use classic JDBC without a connection
+	 * pool. To use it you need to pass any string as argument.
+	 */
+	public WebShopJDBC(String oneConnection) {
 		final Settings settings = Settings.getInstance();
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -117,8 +135,7 @@ public class WebShopJDBC implements Storage {
 
 	@Override
 	public void deleteProduct(int id) {
-		try (final PreparedStatement statement = this.connection
-				.prepareStatement(QUERY_DELETE_PRODUCT)) {
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_DELETE_PRODUCT)) {
 			statement.setInt(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
