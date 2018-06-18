@@ -46,10 +46,13 @@ public interface Storage {
 
 	Product getProductByProductName(String productName);
 
-	// Методы для работы с питомцами
-	// void addPet(Pet pet);
+	/*
+	 * Методы для входа в систему
+	 */
+	public String checkAccountRole(String login);
+	
+	public boolean checkLoginPassword(String login, String password);
 
-	// Методы для работы с животными из приюта
-	// void deleteWildPetFromShelter(int id);
+	
 
 }

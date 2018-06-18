@@ -1,88 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/javaee" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+		
+  <display-name>WebShop</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>servlets.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ViewShopServlet</servlet-name>
+    <servlet-class>servlets.user.ViewShopServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewShopServlet</servlet-name>
+    <url-pattern>/user/view</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewAdminPanelServlet</servlet-name>
+    <servlet-class>servlets.admin.ViewAdminPanelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAdminPanelServlet</servlet-name>
+    <url-pattern>/admin/view</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreateProductServlet</servlet-name>
+    <servlet-class>servlets.admin.CreateProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateProductServlet</servlet-name>
+    <url-pattern>/admin/create-product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProductServlet</servlet-name>
+    <servlet-class>servlets.admin.EditProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProductServlet</servlet-name>
+    <url-pattern>/admin/edit-product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <servlet-class>servlets.admin.DeleteProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <url-pattern>/admin/delete-product</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlets.login.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ViewShopUnregisteredServlet</servlet-name>
+    <servlet-class>servlets.ViewShopUnregisteredServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewShopUnregisteredServlet</servlet-name>
+    <url-pattern>/unregistered</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>AuthorizationAdminFilter</filter-name>
+    <filter-class>
+        filters.AuthorizationAdminFilter
+    </filter-class>
+    <init-param>
+        <param-name>test-param</param-name>
+        <param-value>This parameter is for testing.</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    	<filter-name>AuthorizationAdminFilter</filter-name>
+    	<url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
 
-	<display-name>WebShop</display-name>
-
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-
-	<!--********** Стартовая страница ******************************************** -->
-	<!--************************************************************************** -->
-
-	<servlet>
-		<servlet-name>HomePageServlet</servlet-name>
-		<servlet-class>servlets.HomePageServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>HomePageServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-
-	<!--********** Обзор каталога товаров (пользователь) ************************* -->
-	<!--************************************************************************** -->
-
-	<servlet>
-		<servlet-name>ViewShopServlet</servlet-name>
-		<servlet-class>servlets.user.ViewShopServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ViewShopServlet</servlet-name>
-		<url-pattern>/user/view</url-pattern>
-	</servlet-mapping>
-	
-	<!--********** Действия с ресурсами магазина (администратор) ***************** -->
-	<!--************************************************************************** -->
-	
-	<servlet>
-		<servlet-name>ViewAdminPanelServlet</servlet-name>
-		<servlet-class>servlets.admin.ViewAdminPanelServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ViewAdminPanelServlet</servlet-name>
-		<url-pattern>/admin/view</url-pattern>
-	</servlet-mapping>
-	
-	    <servlet>
-        <servlet-name>CreateProductServlet</servlet-name>
-        <servlet-class>servlets.admin.CreateProductServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CreateProductServlet</servlet-name>
-        <url-pattern>/admin/create-product</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>EditProductServlet</servlet-name>
-        <servlet-class>servlets.admin.EditProductServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>EditProductServlet</servlet-name>
-        <url-pattern>/admin/edit-product</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteProductServlet</servlet-name>
-        <servlet-class>servlets.admin.DeleteProductServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>DeleteProductServlet</servlet-name>
-        <url-pattern>/admin/delete-product</url-pattern>
-    </servlet-mapping>
-	
+  
+  
 </web-app>

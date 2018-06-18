@@ -16,7 +16,7 @@ import models.Product;
  * @author Anatolii Melchenko
  */
 
-public class WebShop implements storages.Storage {
+public class WebShop implements Storage {
 
 	/*
 	 * Каталог товаров
@@ -124,6 +124,18 @@ public class WebShop implements storages.Storage {
 	@Override
 	public void close() {
 
+	}
+
+	@Override
+	public String checkAccountRole(String login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkLoginPassword(String login, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

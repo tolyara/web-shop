@@ -12,7 +12,7 @@ import service.StorageIdentifier;
 import storages.Storage;
 
 /**
- * Сервлет обслуживает атрибутов товара.
+ * Сервлет обслуживает редактирование атрибутов товара.
  * 
  * @author AnatoliiMelchenko
  */
@@ -20,7 +20,7 @@ public class EditProductServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEWADMIN_PATH = "/admin/view";
-	private static final String EDITPRODUCT_PATH = "/views/Admin/EditProduct.jsp";
+	private static final String EDITPRODUCT_PATH = "/views/Admin/EditProduct.jsp";  
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
 	@Override
