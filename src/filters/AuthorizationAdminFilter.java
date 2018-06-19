@@ -19,7 +19,7 @@ import models.Account;
  * Servlet Filter implementation class AuthorizationFilter
  */
 public class AuthorizationAdminFilter implements Filter {
-	
+
 	private static final String ERROR_ACCESS = "/ErrorAccess.jsp";
 
 	@Override
@@ -34,10 +34,13 @@ public class AuthorizationAdminFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;		
+		HttpServletResponse resp = (HttpServletResponse) response;
 		Account loggedAccount = (Account) req.getSession().getAttribute("LOGGED_ACCOUNT");
-		if (loggedAccount == null) {
+		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
+		if (loggedAccount == null || !accountRole.equals("admin")) {
 			resp.sendRedirect(String.format("%s%s", req.getContextPath(), ERROR_ACCESS));
+		} else {
+			chain.doFilter(request, response);
 		}
 	}
 

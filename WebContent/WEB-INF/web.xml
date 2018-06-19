@@ -98,7 +98,28 @@
     	<filter-name>AuthorizationAdminFilter</filter-name>
     	<url-pattern>/admin/*</url-pattern>
   </filter-mapping>
+   <filter-mapping>
+    	<filter-name>AuthorizationAdminFilter</filter-name>
+    	<url-pattern>/views/Admin/*</url-pattern>
+  </filter-mapping>
 
+    <filter>
+    <filter-name>AuthorizationUserFilter</filter-name>
+    <filter-class>
+        filters.AuthorizationUserFilter
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    	<filter-name>AuthorizationUserFilter</filter-name>
+    	<url-pattern>/user/*</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+    	<filter-name>AuthorizationUserFilter</filter-name>
+    	<url-pattern>/views/User/*</url-pattern>
+  </filter-mapping>
   
+  <session-config>
+		<session-timeout>15</session-timeout> 
+  </session-config>
   
 </web-app>

@@ -43,7 +43,8 @@ public class LoginServlet extends HttpServlet {
 		boolean authenticationResult = SHOP_WEB.checkLoginPassword(enteredLogin, req.getParameter("password"));
 		if (authenticationResult == true) {
 			Account accountBean = new Account(enteredLogin);
-			req.getSession().setAttribute("LOGGED_ACCOUNT", accountBean);
+			req.getSession().setAttribute("LOGGED_ACCOUNT", accountBean); 
+			req.getSession().setAttribute("ACCOUNT_ROLE", accountRole.toLowerCase()); // String
 			switch (accountRole.toLowerCase()) {
 			case "user":
 				resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUSER_PATH)); break;

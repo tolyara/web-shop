@@ -20,13 +20,13 @@ import java.util.Set;
 public class ViewShopServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;	
-	private static final String VIEWSHOP_PATH = "/views/User/ViewShopUnautorized.jsp";
+	private static final String VIEWSHOP_JSP = "/views/User/ViewShop.jsp";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("products", SHOP_WEB.getProducts().values());
-        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_PATH);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_JSP);
         dispatcher.forward(req, resp);
     }
 
