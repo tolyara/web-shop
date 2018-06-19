@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Settings {
 
-    private static final Settings INSTANCE = new Settings();
+
+public class Settings {
 
     private final Properties properties = new Properties();
 
@@ -18,9 +18,17 @@ public class Settings {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * SingletonHolder is loaded on the first execution of Settings.getInstance()
+     * or the first access to SettingsHolder.INSTANCE, not before.
+     */
+    private static class SettingsHolder {
+        private static final Settings INSTANCE = new Settings();
+      }
 
     public static Settings getInstance() {
-        return INSTANCE;
+        return SettingsHolder.INSTANCE;
     }
 
     public String value(String key) {

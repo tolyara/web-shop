@@ -68,7 +68,11 @@ public class WebShopJDBC implements Storage {
 				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_PRODUCTS)) {
 			while (rs.next()) {
 				products.put(rs.getInt("product_id"),
-						new Product(rs.getInt("product_id"), rs.getString("product_name")));
+						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk"),
+								rs.getString("manufacturer_name_fk"), rs.getDouble("price"), rs.getDate("creation_date"),
+								rs.getString("colour"), rs.getString("size")));
+//				products.put(rs.getInt("product_id"),
+//						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -211,7 +215,7 @@ public class WebShopJDBC implements Storage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		authenticationResult = true;
+		// authenticationResult = true;
 		return authenticationResult;
 	}
 

@@ -117,6 +117,9 @@
     <session-timeout>15</session-timeout>
   </session-config>
   <listener>
-    <listener-class>listeners.AccountSessionListener</listener-class>
+    <listener-class>listeners.SessionListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>listeners.SessionAttributeListener</listener-class>
   </listener>
 </web-app>

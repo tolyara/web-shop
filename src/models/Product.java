@@ -1,8 +1,6 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Date;
 
 /**
  * Класс описывает товар, который может храниться в онлайн-магазине.
@@ -16,11 +14,17 @@ public class Product {
 	 * ID товара
 	 */
 	private int id;
-	
+
 	/*
 	 * Название товара
 	 */
 	private String productName;
+	private int categoryId;
+	private String manufacturerName;
+	private double price;
+	private Date creationDate;
+	private String colour;
+	private String size;
 
 	public Product() {
 		this.productName = null;
@@ -30,6 +34,32 @@ public class Product {
 		this.id = id;
 		this.productName = productName;
 	}
+
+//	public Product(int int1, String string, int int2, String string2, double double1, String string3, String string4,
+//			String string5) {
+//		// TODO Auto-generated constructor stub
+//	}	
+
+	public Product(int id, String productName, int categoryId, String manufacturerName, double price,
+			Date creationDate, String colour, String size) {
+		this.id = id;
+		this.productName = productName;
+		this.categoryId = categoryId;
+		this.manufacturerName = manufacturerName;
+		this.price = price;
+		this.creationDate = creationDate;
+		this.colour = colour;
+		this.size = size;
+	}
+
+	
+
+	public Product(int id, String productName, int categoryId) {
+	super();
+	this.id = id;
+	this.productName = productName;
+	this.categoryId = categoryId;
+}
 
 	public int getId() {
 		return id;
@@ -45,6 +75,54 @@ public class Product {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+	
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getManufacturerName() {
+		return manufacturerName;
+	}
+
+	public void setManufacturerName(String manufacturerName) {
+		this.manufacturerName = manufacturerName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 }

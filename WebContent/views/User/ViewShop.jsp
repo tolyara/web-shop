@@ -22,6 +22,12 @@
     <tr class="table_head">
         <td> - ID - </td>
         <td> - Наименование - </td>
+        <td> - Категория - </td>
+        <td> - Производитель - </td>
+        <td> - Цена - </td>
+        <td> - Дата изготовления - </td>
+        <td> - Цвет - </td>
+        <td> - Размер - </td>
         <td> - Действия - </td>
     </tr>
     <%-- В переменной products передаются только значения hashmap товаров --%>
@@ -29,6 +35,12 @@
         <tr valign="top">
             <td>${product.id}</td>
             <td>${product.productName}</td>   
+            <td>${product.categoryId}</td>
+            <td>${product.manufacturerName}</td>
+            <td>${product.price}</td>
+            <td>${product.creationDate}</td>
+            <td>${product.colour}</td>
+            <td>${product.size}</td>
             <td>
                 <a href="${pageContext.servletContext.contextPath}/basket/add?ProductID=${product.id}"> Добавить в корзину </a>
             </td>

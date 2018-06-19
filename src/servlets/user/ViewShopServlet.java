@@ -26,7 +26,7 @@ public class ViewShopServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;	
 	private static final String VIEWSHOP_JSP = "/views/User/ViewShop.jsp";
-	private static final String LOGIN_PATH = "/login";
+//	private static final String LOGIN_PATH = "/login";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
     @Override
