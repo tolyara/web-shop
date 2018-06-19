@@ -12,6 +12,7 @@
 <body class="admin">
 
 <h1>Панель управления</h1>
+<p>Вы вошли под логином ${LOGGED_ACCOUNT}, роль ${ACCOUNT_ROLE}</p>
 
                 <%--Каталог товаров--%>
 
@@ -35,7 +36,10 @@
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.servletContext.contextPath}/views/Admin/CreateProduct.jsp"> Добавить товар </a> <br>
+<a href="${pageContext.servletContext.contextPath}/views/Admin/CreateProduct.jsp"> Добавить товар </a> <br> <br> <br> <br>
+<form action="${pageContext.servletContext.contextPath}/logout" method="POST">
+    <input type="submit" align="center" value="Выйти из системы">
+</form>
 <p>  </p>
 </div>
 

@@ -12,6 +12,7 @@
 <body>
 
 <h1>Магазин</h1>
+<p>Вы вошли под логином ${LOGGED_ACCOUNT}, роль ${ACCOUNT_ROLE}</p>
 
                 <%--Каталог товаров--%>
 
@@ -32,8 +33,11 @@
                 <a href="${pageContext.servletContext.contextPath}/basket/add?ProductID=${product.id}"> Добавить в корзину </a>
             </td>
         </tr>
-    </c:forEach>
-</table>
+    </c:forEach> 
+</table> <br>         
+<form action="${pageContext.servletContext.contextPath}/logout" method="POST">
+    <input type="submit" align="center" value="Выйти из системы">
+</form>
 </div>
 
                     <%--Корзина--%>
@@ -61,6 +65,8 @@
     <p style="margin-left: 50px;"> Внимание! Удаление товара(-ов) из <br> корзины происходит автоматически, без <br> подтверждения.
         </p>
 </div>
+
+
 
 <%--Данный скрипт взят и "допилен" под нужды проекта с ресурса http://plnkr.co/edit/im9GDgRDAHMGORMXeSvU?p=preview--%>
 <script>

@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import models.Account;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +29,10 @@ public class ViewAdminPanelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("products", SHOP_WEB.getProducts().values());
+        String loggedAccount = ((Account) req.getSession().getAttribute("LOGGED_ACCOUNT")).getLogin(); 
+        req.setAttribute("LOGGED_ACCOUNT", loggedAccount);
+        String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE"); 
+        req.setAttribute("ACCOUNT_ROLE", accountRole);
         RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWADMIN_PATH);
         dispatcher.forward(req, resp);
     }
