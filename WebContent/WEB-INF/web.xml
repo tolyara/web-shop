@@ -81,6 +81,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddToBasketServlet</servlet-name>
+    <servlet-class>servlets.AddToBasketServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddToBasketServlet</servlet-name>
+    <url-pattern>/add-to-basket</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>

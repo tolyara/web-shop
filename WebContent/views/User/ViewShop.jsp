@@ -12,7 +12,7 @@
 <body>
 
 <h1>Магазин</h1>
-<p>Вы вошли под логином ${LOGGED_ACCOUNT}, роль ${ACCOUNT_ROLE}</p>
+<p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE}</p>
 
                 <%--Каталог товаров--%>
 
@@ -42,7 +42,7 @@
             <td>${product.colour}</td>
             <td>${product.size}</td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/basket/add?ProductID=${product.id}"> Добавить в корзину </a>
+                <a href="${pageContext.servletContext.contextPath}/user/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
             </td>
         </tr>
     </c:forEach> 
@@ -62,10 +62,10 @@
             <td> - Наименование - </td>
             <td> - Количество - </td>
         </tr>
-        <c:forEach var="selectedProduct" items="${selectedProducts}" varStatus="status">
+        <c:forEach var="selectedProduct" items="${LOGGED_ACCOUNT.basket}" varStatus="status">
             <tr valign="top">
-                <td>${selectedProduct.id}</td>
-                <td>${selectedProduct.productName}</td>
+                <td>${LOGGED_ACCOUNT.id}</td>
+                <td>${LOGGED_ACCOUNT.productName}</td>
                 <td>
                     <a href="${pageContext.servletContext.contextPath}/basket/delete?id=${selectedProduct.id}"> Удалить </a><br>
                 </td>

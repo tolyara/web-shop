@@ -42,7 +42,7 @@
             <td>${product.colour}</td>
             <td>${product.size}</td>   
             <td>
-                <a href="${pageContext.servletContext.contextPath}/basket/add?ProductID=${product.id}"> Добавить в корзину </a>
+                <a href="${pageContext.servletContext.contextPath}/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
             </td>
         </tr>
     </c:forEach>
