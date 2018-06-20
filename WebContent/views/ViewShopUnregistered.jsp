@@ -59,12 +59,12 @@
             <td> - Наименование - </td>
             <td> - Количество - </td>
         </tr>
-        <c:forEach var="selectedProduct" items="${selectedProducts}" varStatus="status">
+        <c:forEach var="bufferProduct" items="${bufferProducts}" varStatus="status">
             <tr valign="top">
-                <td>${selectedProduct.id}</td>
-                <td>${selectedProduct.productName}</td>
+                <td>${bufferProduct.id}</td>
+                <td>${bufferProduct.productName}</td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/basket/delete?id=${selectedProduct.id}"> Удалить </a><br>
+                    <a href="${pageContext.servletContext.contextPath}/remove-from-basket?productId=${bufferProduct.id}"> Удалить </a><br>
                 </td>
             </tr>
         </c:forEach>

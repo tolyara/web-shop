@@ -3,45 +3,54 @@ package models;
 import java.util.Date;
 
 /**
- * Класс описывает товар, который может храниться в онлайн-магазине.
+ * Класс описывает товар онлайн-магазина. Товар может храниться на складе, может быть добавлен в корзину, в заказ.
  * 
  * @author AnatoliiMelchenko
- */ 
+ */
 
 public class Product {
 
-	/*
-	 * ID товара
-	 */
+	/* ID товара */
 	private int id;
 
-	/*
-	 * Название товара
-	 */
+	/* Название товара */
 	private String productName;
+
+	/* Категория (бытовая техника, мебель, посуда и пр.) */
 	private int categoryId;
+
+	/* Производитель */
 	private String manufacturerName;
+
+	/* Цена товара за шт. */
 	private double price;
+
+	/* Дата изготовления */
 	private Date creationDate;
+
+	/* Цвет */
 	private String colour;
+
+	/* Габариты (мелкий, средний, крупный) */
 	private String size;
 
+	/*
+	 * Количество штук, может быть реализовано как кол-во доступных единиц на
+	 * складе, так и кол-во штук в корзине/заказе
+	 */
+	private int amount;
+
 	public Product() {
-		this.productName = null;
-	}  
+		// this.productName = null;
+	}
 
 	public Product(int id, String productName) {
 		this.id = id;
 		this.productName = productName;
 	}
 
-//	public Product(int int1, String string, int int2, String string2, double double1, String string3, String string4,
-//			String string5) {
-//		// TODO Auto-generated constructor stub
-//	}	
-
-	public Product(int id, String productName, int categoryId, String manufacturerName, double price,
-			Date creationDate, String colour, String size) {
+	public Product(int id, String productName, int categoryId, String manufacturerName, double price, Date creationDate,
+			String colour, String size) {
 		this.id = id;
 		this.productName = productName;
 		this.categoryId = categoryId;
@@ -52,14 +61,12 @@ public class Product {
 		this.size = size;
 	}
 
-	
-
 	public Product(int id, String productName, int categoryId) {
-	super();
-	this.id = id;
-	this.productName = productName;
-	this.categoryId = categoryId;
-}
+		super();
+		this.id = id;
+		this.productName = productName;
+		this.categoryId = categoryId;
+	}
 
 	public int getId() {
 		return id;
@@ -76,7 +83,7 @@ public class Product {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
+
 	public int getCategoryId() {
 		return categoryId;
 	}

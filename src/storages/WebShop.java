@@ -31,7 +31,7 @@ public class WebShop implements Storage {
 
 	private static final WebShop INSTANCE = new WebShop();
 
-	public WebShop() {
+	private WebShop() {
 		products = new ConcurrentHashMap<>();
 		fillShop();
 	}
@@ -83,7 +83,7 @@ public class WebShop implements Storage {
 	}
 
 	/*
-	 * Добавить товар.
+	 * Добавить товар в магазин.
 	 */
 	@Override
 	public int addProduct(Product product) {

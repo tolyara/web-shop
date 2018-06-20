@@ -42,7 +42,7 @@
             <td>${product.colour}</td>
             <td>${product.size}</td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/user/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
+                <a href="${pageContext.servletContext.contextPath}/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
             </td>
         </tr>
     </c:forEach> 
@@ -62,12 +62,12 @@
             <td> - Наименование - </td>
             <td> - Количество - </td>
         </tr>
-        <c:forEach var="selectedProduct" items="${LOGGED_ACCOUNT.basket}" varStatus="status">
+        <c:forEach var="bufferProduct" items="${bufferProducts}" varStatus="status">
             <tr valign="top">
-                <td>${LOGGED_ACCOUNT.id}</td>
-                <td>${LOGGED_ACCOUNT.productName}</td>
+                <td>${bufferProduct.id}</td>
+                <td>${bufferProduct.productName}</td>
                 <td>
-                    <a href="${pageContext.servletContext.contextPath}/basket/delete?id=${selectedProduct.id}"> Удалить </a><br>
+                    <a href="${pageContext.servletContext.contextPath}/remove-from-basket?productId=${bufferProduct.id}"> Удалить </a><br>
                 </td>
             </tr>
         </c:forEach>

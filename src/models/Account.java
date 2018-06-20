@@ -4,10 +4,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Account {
 
+	/*
+	 * Уникальный логин аккаунта
+	 */
 	private String login;
 	/*
-	 * Корзина товаров
+	 * Статус аккаунта, если true - активен, false - заблокирован
 	 */
+	private boolean isActive = true;
 //	private ConcurrentHashMap<Integer, Product> basket;
 
 	public Account(String login) {
@@ -20,18 +24,6 @@ public class Account {
 	
 	public String getLogin() {
 		return login;
-	}
-
-//	public ConcurrentHashMap<Integer, Product> getBasket() {
-//		return basket;
-//	}
-
-//	public void setBasket(ConcurrentHashMap<Integer, Product> basket) {
-//		this.basket = basket;
-//	}
-
-	public void addToBasket(Product product) {
-//		basket.put(product.getId(), product);
 	}
 
 }
