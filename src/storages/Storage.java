@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import models.Order;
 import models.Product;
 
 /**
@@ -53,6 +54,6 @@ public interface Storage {
 	
 	public boolean checkLoginPassword(String login, String password);
 
-	
+	void makeOrder(String login, Order order);	
 
 }

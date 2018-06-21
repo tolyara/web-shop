@@ -38,6 +38,7 @@ public class AuthorizationAdminFilter implements Filter {
 		Account loggedAccount = (Account) req.getSession().getAttribute("LOGGED_ACCOUNT");
 		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
 		if (loggedAccount == null || !accountRole.equals("admin")) {
+			// if (!accountRole.equals("admin")) {
 			resp.sendRedirect(String.format("%s%s", req.getContextPath(), ERROR_ACCESS));
 		} else {
 			chain.doFilter(request, response);

@@ -8,7 +8,8 @@
 <body>
 
 	<h1>Ошибка!</h1>
-	<p>Отказано в доступе.</p>
+	<p>Отказано в доступе.</p> <br>
+	<a href="${pageContext.servletContext.contextPath}/"> На главную </a> 
 
 </body>
 </html>

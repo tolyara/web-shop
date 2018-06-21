@@ -23,7 +23,7 @@ import java.util.Set;
 public class ViewShopUnregisteredServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;	
-	private static final String VIEWSHOP_UNREGISTERED_PATH = "/views/ViewShopUnregistered.jsp";
+	private static final String VIEWSHOP_UNREGISTERED_JSP = "/views/ViewShopUnregistered.jsp";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 	private static final Basket BASKET = Basket.getInstance();
 
@@ -31,7 +31,7 @@ public class ViewShopUnregisteredServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("products", SHOP_WEB.getProducts().values());
         req.setAttribute("bufferProducts", BASKET.getBufferProducts().values());
-        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_UNREGISTERED_PATH);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_UNREGISTERED_JSP);
         dispatcher.forward(req, resp);
     }
 

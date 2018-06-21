@@ -28,6 +28,7 @@
         <td> - Дата изготовления - </td>
         <td> - Цвет - </td>
         <td> - Размер - </td>
+        <td> - Количество <br> на складе - </td>
         <td> - Действия - </td>
     </tr>
     <%-- В переменной products передаются только значения hashmap товаров --%>
@@ -41,6 +42,7 @@
             <td>${product.creationDate}</td>
             <td>${product.colour}</td>
             <td>${product.size}</td>
+            <td>${product.amount}</td>
             <td>
                 <a href="${pageContext.servletContext.contextPath}/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
             </td>
@@ -61,18 +63,20 @@
             <td> - ID - </td>
             <td> - Наименование - </td>
             <td> - Количество - </td>
+            <td> - Действия - </td>
         </tr>
         <c:forEach var="bufferProduct" items="${bufferProducts}" varStatus="status">
             <tr valign="top">
                 <td>${bufferProduct.id}</td>
                 <td>${bufferProduct.productName}</td>
+                <td>${bufferProduct.amount}</td>
                 <td>
                     <a href="${pageContext.servletContext.contextPath}/remove-from-basket?productId=${bufferProduct.id}"> Удалить </a><br>
                 </td>
             </tr>
         </c:forEach>
     </table> <br>
-    <a class="link-make-order" href="${pageContext.servletContext.contextPath}/views/User/MakeOrder.jsp"> Оформить заказ </a> <br>
+    <a class="link-make-order" href="${pageContext.servletContext.contextPath}/user/make-order?userLogin=${LOGGED_ACCOUNT.login}"> Оформить заказ </a> <br>
     <p>  </p>
     <p style="margin-left: 50px;"> Внимание! Удаление товара(-ов) из <br> корзины происходит автоматически, без <br> подтверждения.
         </p>

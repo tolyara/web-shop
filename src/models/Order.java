@@ -1,5 +1,7 @@
 package models;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Класс описывает заказ, который создается пользователем.
  * 
@@ -7,19 +9,16 @@ package models;
  */ 
 public class Order {
 
-	/*
-	 * ID заказа
-	 */
+	/* ID заказа */
 	private int id;
 	
-	/*
-	 * ID пользователя, сделавшего заказ
-	 */
-	private int userId;	
+	/* Логин пользователя, сделавшего заказ */
+	private int userLogin;	
 	
-	/*
-	 * Статус заказа, возможные варианты - registered, denied
-	 */
+	/* Выбранные товары */
+	private ConcurrentHashMap<Integer, Product> orderedProducts;
+	
+	/* Статус заказа, возможные варианты - registered, paid, denied */
 	private String status;
 
 	public Order() {

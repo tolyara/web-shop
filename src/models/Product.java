@@ -3,7 +3,8 @@ package models;
 import java.util.Date;
 
 /**
- * Класс описывает товар онлайн-магазина. Товар может храниться на складе, может быть добавлен в корзину, в заказ.
+ * Класс описывает товар онлайн-магазина. Товар может храниться на складе, может
+ * быть добавлен в корзину, в заказ.
  * 
  * @author AnatoliiMelchenko
  */
@@ -50,7 +51,7 @@ public class Product {
 	}
 
 	public Product(int id, String productName, int categoryId, String manufacturerName, double price, Date creationDate,
-			String colour, String size) {
+			String colour, String size, int amount) {
 		this.id = id;
 		this.productName = productName;
 		this.categoryId = categoryId;
@@ -59,6 +60,7 @@ public class Product {
 		this.creationDate = creationDate;
 		this.colour = colour;
 		this.size = size;
+		this.amount = amount;
 	}
 
 	public Product(int id, String productName, int categoryId) {
@@ -66,6 +68,15 @@ public class Product {
 		this.id = id;
 		this.productName = productName;
 		this.categoryId = categoryId;
+	}
+
+	/**
+	 * Copy constructor.
+	 */
+	public Product(Product product) {
+		this(product.getId(), product.getProductName(), product.getCategoryId(), product.getManufacturerName(),
+				product.getPrice(), product.getCreationDate(), product.getColour(), product.getSize(),
+				product.getAmount());
 	}
 
 	public int getId() {
@@ -130,6 +141,14 @@ public class Product {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 }

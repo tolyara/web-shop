@@ -20,18 +20,18 @@ public class DeleteProductServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEWADMIN_PATH = "/admin/view";
-	private static final String DELETEPRODUCT_PATH = "/views/Admin/DeleteProduct.jsp";
-    private static final Storage CLINIC_WEB = StorageIdentifier.getStorage();
+	private static final String DELETEPRODUCT_JSP = "/views/Admin/DeleteProduct.jsp";
+    private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("product", CLINIC_WEB.getProductById(Integer.valueOf(req.getParameter("id"))));
-        RequestDispatcher dispatcher = req.getRequestDispatcher(DELETEPRODUCT_PATH);
+        req.setAttribute("product", SHOP_WEB.getProductById(Integer.valueOf(req.getParameter("id"))));
+        RequestDispatcher dispatcher = req.getRequestDispatcher(DELETEPRODUCT_JSP);
         dispatcher.forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CLINIC_WEB.deleteProduct(Integer.valueOf(req.getParameter("id")));
+    	SHOP_WEB.deleteProduct(Integer.valueOf(req.getParameter("id")));
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWADMIN_PATH));
     }
 

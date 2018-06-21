@@ -97,6 +97,14 @@
     <servlet-name>RemoveFromBasketServlet</servlet-name>
     <url-pattern>/remove-from-basket</url-pattern>
   </servlet-mapping>
+  <servlet>
+       <servlet-name>MakeOrderServlet</servlet-name>
+    <servlet-class>servlets.user.MakeOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MakeOrderServlet</servlet-name>
+    <url-pattern>/user/make-order</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>

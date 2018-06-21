@@ -1,5 +1,6 @@
 package storages;
 
+import models.Order;
 import models.Product;
 import service.Settings;
 
@@ -70,7 +71,7 @@ public class WebShopJDBC implements Storage {
 				products.put(rs.getInt("product_id"),
 						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk"),
 								rs.getString("manufacturer_name_fk"), rs.getDouble("price"), rs.getDate("creation_date"),
-								rs.getString("colour"), rs.getString("size")));
+								rs.getString("colour"), rs.getString("size"), rs.getInt("amount_in_storage")));
 //				products.put(rs.getInt("product_id"),
 //						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk")));
 			}
@@ -114,7 +115,7 @@ public class WebShopJDBC implements Storage {
 	}
 
 	/*
-	 * TODO - данный метод переписать с помощью select...
+	 * TODO - данный метод переписать с помощью select... UPD - способ не найден
 	 */
 	@Override
 	public Product getProductById(int id) {
@@ -215,8 +216,12 @@ public class WebShopJDBC implements Storage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// authenticationResult = true;
 		return authenticationResult;
+	}
+
+	@Override
+	public void makeOrder(String login, Order order) {
+		// TODO Auto-generated method stub
 	}
 
 }

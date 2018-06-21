@@ -28,6 +28,7 @@
         <td> - Дата изготовления - </td>
         <td> - Цвет - </td>
         <td> - Размер - </td>
+        <td> - Количество <br> на складе - </td> 
         <td> - Действия - </td>
     </tr>
     <%-- В переменной products передаются только значения hashmap товаров --%>
@@ -40,7 +41,8 @@
             <td>${product.price}</td>
             <td>${product.creationDate}</td>
             <td>${product.colour}</td>
-            <td>${product.size}</td>  
+            <td>${product.size}</td> 
+            <td>${product.amount}</td>  
             <td>
                 <a href="${pageContext.servletContext.contextPath}/admin/edit-product?id=${product.id}"> Редактировать </a>
                 <a href="${pageContext.servletContext.contextPath}/admin/delete-product?id=${product.id}"> Удалить </a><br>

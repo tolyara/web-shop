@@ -41,8 +41,11 @@ public class Basket {
 
 	/* Добавить товар в корзину. */
 	public int addToBasket(Product product) {
-		bufferProducts.put(product.getId(), product);
-		return product.getId();
+		/* Создаем копию товара */
+		Product productForAdd = new Product(product);
+		productForAdd.setAmount(1);
+		bufferProducts.put(productForAdd.getId(), productForAdd);
+		return productForAdd.getId();
 	}
 
 	/* Удалить товар из корзины. */
