@@ -54,6 +54,8 @@ public interface Storage {
 	
 	public boolean checkLoginPassword(String login, String password);
 
-	void makeOrder(String login, Order order);	
+	public int makeOrder(Order order);
+
+	public int generateOrderId();	
 
 }

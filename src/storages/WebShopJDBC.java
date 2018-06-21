@@ -30,6 +30,8 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";
 	private static final String QUERY_SELECT_ALL_ROLES = "select * from account_roles;";
 	private static final String QUERY_SELECT_ALL_ACCOUNTS = "select * from accounts;";
+	private static final String QUERY_INSERT_ORDER = "insert into orders (account_name_fk, status) values (?, ?);";
+	private static final String QUERY_INSERT_INTO_ORDER_PRODUCT = "insert into order_product (order_id, product_id, product_name, product_amount) values (?, ?, ?, ?);";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -70,10 +72,12 @@ public class WebShopJDBC implements Storage {
 			while (rs.next()) {
 				products.put(rs.getInt("product_id"),
 						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk"),
-								rs.getString("manufacturer_name_fk"), rs.getDouble("price"), rs.getDate("creation_date"),
-								rs.getString("colour"), rs.getString("size"), rs.getInt("amount_in_storage")));
-//				products.put(rs.getInt("product_id"),
-//						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk")));
+								rs.getString("manufacturer_name_fk"), rs.getDouble("price"),
+								rs.getDate("creation_date"), rs.getString("colour"), rs.getString("size"),
+								rs.getInt("amount_in_storage")));
+				// products.put(rs.getInt("product_id"),
+				// new Product(rs.getInt("product_id"), rs.getString("product_name"),
+				// rs.getInt("category_id_fk")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +94,6 @@ public class WebShopJDBC implements Storage {
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
 				Statement.RETURN_GENERATED_KEYS)) {
 			statement.setString(1, product.getProductName());
-			// statement.setString(2, client.getName());
 			statement.executeUpdate();
 			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
@@ -220,8 +223,48 @@ public class WebShopJDBC implements Storage {
 	}
 
 	@Override
-	public void makeOrder(String login, Order order) {
-		// TODO Auto-generated method stub
+	public int makeOrder(Order order) {
+		int addedOrderId = -1;
+		/* Сначала добавим новый заказ в таблицу orders */
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_ORDER,
+				Statement.RETURN_GENERATED_KEYS)) {
+			statement.setString(1, order.getUserLogin());
+			statement.setString(2, order.getStatus().toString());
+			statement.executeUpdate();
+			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					addedOrderId = generatedKeys.getInt(1);
+				} else {
+					throw new IllegalStateException("Could not add new product to DB!");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		System.out.println(addedOrderId);
+		/* Затем добавляем информацию в таблицу order_product */
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_INTO_ORDER_PRODUCT)) {
+			for (Product product : order.getOrderedProducts().values()) {
+			statement.setInt(1, addedOrderId);
+			statement.setInt(2, product.getId());
+			statement.setString(3, product.getProductName());
+			statement.setInt(4, product.getAmount());
+			statement.executeUpdate();
+			statement.clearParameters();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return addedOrderId;
+	}
+
+	/*
+	 * Создаем заглушку для метода generateOrderId(), определенного в
+	 * интерфейсе-предке.
+	 */
+	@Override
+	public int generateOrderId() {
+		return 7;
 	}
 
 }

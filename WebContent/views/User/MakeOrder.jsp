@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<h1>Проверка данных</h1>
+<p>Проверьте данные, и, если все корректно, подтвердите действие </p>
+
 	<table border="1">
 		<caption>Заказ</caption>
 		<tr class="table_head">
@@ -28,7 +31,7 @@
 	<form
 		action="${pageContext.servletContext.contextPath}/user/make-order"
 		method="POST">
-		<input type="hidden" name="userLogin" value="${userLogin.login}"> <input
+		<input type="hidden" name="userLogin" value="${userLogin}"> <input
 			type="submit" align="center" value="Оформить заказ">
 	</form>
 
