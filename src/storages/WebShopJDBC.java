@@ -1,6 +1,7 @@
 package storages;
 
 import models.Order;
+import models.OrderStatus;
 import models.Product;
 import service.Settings;
 
@@ -32,6 +33,8 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_SELECT_ALL_ACCOUNTS = "select * from accounts;";
 	private static final String QUERY_INSERT_ORDER = "insert into orders (account_name_fk, status) values (?, ?);";
 	private static final String QUERY_INSERT_INTO_ORDER_PRODUCT = "insert into order_product (order_id, product_id, product_name, product_amount) values (?, ?, ?, ?);";
+	private static final String QUERY_SELECT_ALL_ORDERS = "select * from orders;";
+	private static final String QUERY_SELECT_ALL_ORDER_PRODUCT = "select * from orders_product";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -241,16 +244,16 @@ public class WebShopJDBC implements Storage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		System.out.println(addedOrderId);
+		// System.out.println(addedOrderId);
 		/* Затем добавляем информацию в таблицу order_product */
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_INTO_ORDER_PRODUCT)) {
 			for (Product product : order.getOrderedProducts().values()) {
-			statement.setInt(1, addedOrderId);
-			statement.setInt(2, product.getId());
-			statement.setString(3, product.getProductName());
-			statement.setInt(4, product.getAmount());
-			statement.executeUpdate();
-			statement.clearParameters();
+				statement.setInt(1, addedOrderId);
+				statement.setInt(2, product.getId());
+				statement.setString(3, product.getProductName());
+				// statement.setInt(4, product.getAmount());
+				statement.executeUpdate();
+				statement.clearParameters();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -265,6 +268,54 @@ public class WebShopJDBC implements Storage {
 	@Override
 	public int generateOrderId() {
 		return 7;
+	}
+
+	@Override
+	public ConcurrentHashMap<Integer, Order> getUserOrders(String login) {
+		// ConcurrentHashMap<Integer, Product> foundedOrderedProducts =
+		// this.getProducts();
+
+		ConcurrentHashMap<Integer, Order> foundedOrders = new ConcurrentHashMap<Integer, Order>();
+		try (final Statement statement = this.connection.createStatement();
+				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDERS)) {
+			while (rs.next()) {
+				/*
+				 * Сравниваем логины из таблицы БД orders с переданным через параметр логином
+				 * аккаунта
+				 */
+				int orderId = rs.getInt("order_id");
+				if (rs.getString("account_name_fk").equals(login)) {
+					foundedOrders.put(orderId, new Order(orderId, rs.getString("account_name_fk"),
+							this.getOrderedProductsByOrderId(orderId), OrderStatus.recognizeOrderStatus(rs.getString("status"))));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return foundedOrders;
+	}
+
+	private ConcurrentHashMap<Integer, Product> getOrderedProductsByOrderId(int orderId) {
+		ConcurrentHashMap<Integer, Product> foundedOrderedProducts = new ConcurrentHashMap<Integer, Product>();
+		try (final Statement statement = this.connection.createStatement();
+				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDER_PRODUCT)) {
+			while (rs.next()) {
+				/*
+				 * Сравниваем логины из таблицы БД orders с переданным через параметр логином
+				 * аккаунта
+				 */
+				if (rs.getInt("order_id") == orderId) {
+					foundedOrderedProducts.put(rs.getInt("product_id"),
+							new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id"),
+									rs.getString("manufacturer_name"), rs.getDouble("price"),
+									rs.getDate("creation_date"), rs.getString("colour"), rs.getString("size"),
+									rs.getInt("ordered_amount")));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return foundedOrderedProducts;
 	}
 
 }

@@ -37,7 +37,9 @@
             </td>
         </tr>
     </table>
-</form>
+</form> <br>
+
+<a href="${pageContext.servletContext.contextPath}/"> На главную </a> <p> </p>
 
 </body>
 </html>

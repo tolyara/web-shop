@@ -22,7 +22,7 @@ public class RemoveFromBasketServlet extends HttpServlet {
 	private static final Basket BASKET = Basket.getInstance(); 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {    	
-    	BASKET.deleteProduct(Integer.valueOf(req.getParameter("productId")));
+    	BASKET.removeProduct(Integer.valueOf(req.getParameter("productId")));
 		/*
 		 * Проверяем, залогинен ли пользователь, для того чтобы сделать корректный редирект 
 		 */

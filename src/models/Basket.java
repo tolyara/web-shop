@@ -49,7 +49,7 @@ public class Basket {
 	}
 
 	/* Удалить товар из корзины. */
-	public void deleteProduct(int id) {
+	public void removeProduct(int id) {
 		bufferProducts.remove(id); 
 	}
 
@@ -60,6 +60,10 @@ public class Basket {
 			iterator.next();
 			iterator.remove();
 		}
+	}
+
+	public void changeProductAmount(int id, int newAmount) {
+		bufferProducts.get(id).setAmount(newAmount);		
 	}
 
 }

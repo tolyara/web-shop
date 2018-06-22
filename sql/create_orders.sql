@@ -1,10 +1,6 @@
 ﻿
-CREATE TABLE orders (
-	order_id serial PRIMARY KEY,
-	account_name_fk VARCHAR(30) NOT NULL references accounts(account_name)
-);
-
-INSERT INTO orders () VALUES ('');
+delete from order_product where order_product_id >= '1';
+delete from orders where order_id >= '1';
 
 
 

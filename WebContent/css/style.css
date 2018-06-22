@@ -62,9 +62,14 @@ a {
 }
 
 .admin {
-    background: #00fffe;
+    background: #d3f8fe;
 }
 
+.orders {
+	float: left;
+    background: #80ffff;
+    width: auto;
+}
 
 
 

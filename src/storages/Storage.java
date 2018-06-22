@@ -56,6 +56,8 @@ public interface Storage {
 
 	public int makeOrder(Order order);
 
-	public int generateOrderId();	
+	public int generateOrderId();
+
+	public ConcurrentHashMap<Integer, Order> getUserOrders(String login);	
 
 }

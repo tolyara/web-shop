@@ -20,13 +20,13 @@ public class EditProductServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEWADMIN_PATH = "/admin/view";
-	private static final String EDITPRODUCT_PATH = "/views/Admin/EditProduct.jsp";  
+	private static final String EDITPRODUCT_JSP = "/views/Admin/EditProduct.jsp";  
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("product", SHOP_WEB.getProductById(Integer.valueOf(req.getParameter("id"))));
-		RequestDispatcher dispatcher = req.getRequestDispatcher(EDITPRODUCT_PATH);
+		RequestDispatcher dispatcher = req.getRequestDispatcher(EDITPRODUCT_JSP);
 		dispatcher.forward(req, resp);
 	}
 

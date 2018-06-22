@@ -105,6 +105,22 @@
     <servlet-name>MakeOrderServlet</servlet-name>
     <url-pattern>/user/make-order</url-pattern>
   </servlet-mapping>
+   <servlet>
+       <servlet-name>ChangeProductsAmountInBasketServlet</servlet-name>
+    <servlet-class>servlets.basket.ChangeProductsAmountInBasketServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeProductsAmountInBasketServlet</servlet-name>
+    <url-pattern>/change-products-amount-in-basket"</url-pattern>
+  </servlet-mapping>
+  <servlet>
+       <servlet-name>CabinetServlet</servlet-name>
+    <servlet-class>servlets.user.CabinetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CabinetServlet</servlet-name>
+    <url-pattern>/user/cabinet</url-pattern> 
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>

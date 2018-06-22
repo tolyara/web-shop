@@ -12,7 +12,8 @@
 <body>
 
 <h1>Магазин</h1>
-<p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE}</p>
+<p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE} <br> <a href="${pageContext.servletContext.contextPath}/user/cabinet?userLogin=${LOGGED_ACCOUNT.login}"> Перейти в личный кабинет для просмотра заказов </a></p> <br>
+
 
                 <%--Каталог товаров--%>
 
@@ -44,7 +45,7 @@
             <td>${product.size}</td>
             <td>${product.amount}</td>
             <td>
-                <a href="${pageContext.servletContext.contextPath}/add-to-basket?productId=${product.id}"> Добавить в корзину </a>
+                <a href="${pageContext.servletContext.contextPath}/add-to-basket?productId=${product.id}"> Добавить <br> в корзину </a>
             </td>
         </tr>
     </c:forEach> 
@@ -62,7 +63,8 @@
         <tr class="table_head">
             <td> - ID - </td>
             <td> - Наименование - </td>
-            <td> - Количество - </td>
+            <td width="7px"> - Количество - </td>
+            <td> - Изменить <br> количество - </td>
             <td> - Действия - </td>
         </tr>
         <c:forEach var="bufferProduct" items="${bufferProducts}" varStatus="status">
@@ -71,6 +73,12 @@
                 <td>${bufferProduct.productName}</td>
                 <td>${bufferProduct.amount}</td>
                 <td>
+                <form action="${pageContext.servletContext.contextPath}/change-products-amount-in-basket" method="POST">
+                	<input type="text" name="newAmount" value="${product.amount}" size="1"><input type="submit" align="center" value="Изменить"/>
+                </form> 
+                </td>               	
+                <td>
+                	<%-- <a href="${pageContext.servletContext.contextPath}/change-products-amount-in-basket?productId=${bufferProduct.id}"> Изменить </a><br> --%>                
                     <a href="${pageContext.servletContext.contextPath}/remove-from-basket?productId=${bufferProduct.id}"> Удалить </a><br>
                 </td>
             </tr>
