@@ -46,7 +46,7 @@ include file ='/css/style.css'
 							method="POST">
 							<p>
 								<select size="1" name="newOrderStatus">
-									<option disabled>Выберите статус</option>
+									<option selected disabled>Выберите статус</option>
 									<option value="REGISTERED">зарегистрирован</option>
 									<option value="PAID">оплачен</option>
 									<option value="CANCELLED">отменен</option>

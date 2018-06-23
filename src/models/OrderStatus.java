@@ -7,7 +7,7 @@ package models;
  */ 
 public enum OrderStatus {
 	
-	REGISTERED, PAID, CANCELLED;
+	REGISTERED, PAID, CANCELLED; 
 	
 	public static OrderStatus recognizeOrderStatus(String status) {
 		switch (status.toUpperCase()) {
