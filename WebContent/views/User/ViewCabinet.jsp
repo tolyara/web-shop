@@ -12,7 +12,7 @@ include file ='/css/style.css'
 %>
 </style>
 </head>
-<body>
+<body class="user">
 
 	<h1>Личный кабинет</h1>
 	<p>

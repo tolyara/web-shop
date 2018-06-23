@@ -63,12 +63,14 @@ a {
 
 .admin {
     background: #d3f8fe;
+    overflow: auto;
 }
 
 .orders {
 	float: left;
     background: #80ffff;
     width: auto;
+    overflow: auto;
 }
 
 .accounts {

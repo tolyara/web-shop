@@ -9,7 +9,7 @@
         <%@include file='/css/style.css' %>
     </style>
 </head>
-<body>
+<body class="user">
 
 <h1>Магазин</h1>
 <p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE} <br><br> <a href="${pageContext.servletContext.contextPath}/user/cabinet?userLogin=${LOGGED_ACCOUNT.login}"> Перейти в личный кабинет для просмотра заказов </a></p> <br>

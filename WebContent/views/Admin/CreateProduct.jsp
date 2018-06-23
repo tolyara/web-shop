@@ -11,9 +11,51 @@
 <form action="${pageContext.servletContext.contextPath}/admin/create-product" method="POST">
     <table>
         <tr>
-            <td align="right"> Введите наименование товара : </td>
+            <td align="right"> Введите наименование : </td>
             <td>
                 <input type="text" name="productname">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите категорию : </td>
+            <td>
+                <input type="text" name="category_id_fk">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите производителя : </td>
+            <td>
+                <input type="text" name="manufacturer_name_fk">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите цену : </td>
+            <td>
+                <input type="text" name="price">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите дату изготовления : </td>
+            <td>
+                <input type="text" name="creation_date">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите цвет : </td>
+            <td>
+                <input type="text" name="colour">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите размер : </td>
+            <td>
+                <input type="text" name="size">
+            </td>
+        </tr>
+                <tr>
+            <td align="right"> Введите доступное количество на складе : </td>
+            <td>
+                <input type="text" name="amount_in_storage">
             </td>
         </tr>
         <tr>

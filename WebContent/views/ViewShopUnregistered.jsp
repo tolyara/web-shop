@@ -9,7 +9,7 @@
         <%@include file='/css/style.css' %>
     </style>
 </head>
-<body>
+<body class="user">
 
 <h1>Магазин</h1>
 <p>Незарегистрированный пользователь, доступные опции ограничены</p>

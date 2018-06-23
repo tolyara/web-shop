@@ -28,7 +28,7 @@ public class WebShopJDBC implements Storage {
 
 	private Connection connection;
 	private static final String QUERY_SELECT_ALL_PRODUCTS = "select * from products order by product_id;";
-	private static final String QUERY_INSERT_PRODUCT = "insert into products (product_name) values (?);";
+	private static final String QUERY_INSERT_PRODUCT = "insert into products (product_name, category_id, manufacturer_name, price, creation_date, colour, size, ordered_amount) values (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String QUERY_UPDATE_PRODUCT = "update products as products set product_name = ? where products.product_id = ?;";
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";
 	private static final String QUERY_SELECT_ALL_ROLES = "select * from account_roles;";
@@ -100,6 +100,13 @@ public class WebShopJDBC implements Storage {
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
 				Statement.RETURN_GENERATED_KEYS)) {
 			statement.setString(1, product.getProductName());
+			statement.setInt(2, product.getCategoryId());
+			statement.setString(3, product.getManufacturerName());
+			statement.setDouble(4, product.getPrice());
+			statement.setDate(5, (java.sql.Date) product.getCreationDate());
+			statement.setString(6, product.getColour());
+			statement.setString(7, product.getSize());
+			statement.setInt(8, product.getAmount());
 			statement.executeUpdate();
 			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
