@@ -57,7 +57,9 @@ public interface Storage {
 
 	public ConcurrentHashMap<Integer, Order> getUserOrders(String login);
 	
-	public ConcurrentHashMap<Integer, Order> getAllOrders();	
+	public ConcurrentHashMap<Integer, Order> getAllOrders();
+	
+	public void changeOrderStatus(int orderId, String newOrderStatus);	
 	
 	/*
 	 * Методы для работы с аккаунтами
@@ -65,7 +67,5 @@ public interface Storage {
 	public ConcurrentHashMap<String, Account> getAccounts();
 
 	public void changeAccountStatus(String login, Boolean currentStatus);
-
-	
 
 }

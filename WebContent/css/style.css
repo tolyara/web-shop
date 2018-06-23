@@ -66,6 +66,10 @@ a {
     overflow: auto;
 }
 
+.user {
+    overflow: auto;
+}
+
 .orders {
 	float: left;
     background: #80ffff;

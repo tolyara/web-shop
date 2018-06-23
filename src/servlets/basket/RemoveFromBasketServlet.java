@@ -21,6 +21,7 @@ public class RemoveFromBasketServlet extends HttpServlet {
 //	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 	private static final Basket BASKET = Basket.getInstance(); 
 
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {    	
     	BASKET.removeProduct(Integer.valueOf(req.getParameter("productId")));
 		/*

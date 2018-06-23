@@ -16,8 +16,8 @@ include file ='/css/style.css'
 
 	<h1>Заказы</h1>
 	<p>
-		Здесь Вы можете просмотреть все заказы пользователей <br><br> <a
-			href="${pageContext.servletContext.contextPath}/admin/view">
+		Здесь Вы можете просмотреть все заказы пользователей <br> <br>
+		<a href="${pageContext.servletContext.contextPath}/admin/view">
 			Вернуться в панель управления </a>
 	</p>
 
@@ -28,9 +28,11 @@ include file ='/css/style.css'
 			<caption>Заказы</caption>
 			<tr class="table_head">
 				<td>- ID заказа -</td>
-				<td>- Логин <br> пользователя -</td>
+				<td>- Логин <br> пользователя -
+				</td>
 				<td>- Статус -</td>
-				<td>- Итоговая <br> стоимость -</td>
+				<td>- Итоговая <br> стоимость -
+				</td>
 				<td>- Данные о товарах -</td>
 			</tr>
 			<%-- В переменной userOrders передаются и ключи, и значения hashmap заказов --%>
@@ -38,7 +40,22 @@ include file ='/css/style.css'
 				<tr valign="top">
 					<td>${order.value.id}</td>
 					<td>${order.value.userLogin}</td>
-					<td>${order.value.status}</td>
+					<td>${order.value.status}<br>
+						<form
+							action="${pageContext.servletContext.contextPath}/admin/change-order-status?orderId=${order.value.id}"
+							method="POST">
+							<p>
+								<select size="1" name="newOrderStatus">
+									<option disabled>Выберите статус</option>
+									<option value="REGISTERED">зарегистрирован</option>
+									<option value="PAID">оплачен</option>
+									<option value="CANCELLED">отменен</option>
+								</select>
+							</p>
+							<p>
+								<input type="submit" value="Отправить">
+							</p>
+						</form>
 					<td>${order.value.totalPrice}</td>
 					<td>
 						<table>

@@ -38,6 +38,7 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_SELECT_ALL_ORDERS = "select * from orders;";
 	private static final String QUERY_SELECT_ALL_ORDER_PRODUCT = "select * from order_product;";
 	private static final String QUERY_UPDATE_ACCOUNT_STATUS = "update accounts as accounts set is_active = ? where accounts.account_name = ?;";
+	private static final String QUERY_UPDATE_ORDER_STATUS = "update orders as orders set status = ? where orders.order_id = ?;";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -373,7 +374,6 @@ public class WebShopJDBC implements Storage {
 				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDERS)) {
 			while (rs.next()) {
 				int orderId = rs.getInt("order_id");
-				// if (rs.getString("account_name_fk").equals(login)) {
 				foundedOrders.put(orderId,
 						new Order(orderId, rs.getString("account_name_fk"), this.getOrderedProductsByOrderId(orderId),
 								OrderStatus.recognizeOrderStatus(rs.getString("status"))));
@@ -383,6 +383,22 @@ public class WebShopJDBC implements Storage {
 			e.printStackTrace();
 		}
 		return foundedOrders;
+	}
+
+	@Override
+	public void changeOrderStatus(int orderId, String newOrderStatus) {
+		// ConcurrentHashMap<Integer, Order> foundedOrders = this.getAllOrders();
+		// for (Order order : foundedOrders.values()) {
+		// /* находим заказ по id */
+		// if (order.getId() == orderId) {
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_UPDATE_ORDER_STATUS)) {
+			/* меняем статус заказа */
+			statement.setString(1, OrderStatus.recognizeOrderStatus(newOrderStatus).toString());
+			statement.setInt(2, orderId);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

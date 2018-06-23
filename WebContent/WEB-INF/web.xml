@@ -137,6 +137,14 @@
     <servlet-name>ViewOrdersServlet</servlet-name>
     <url-pattern>/admin/orders</url-pattern> 
   </servlet-mapping>
+  <servlet>
+       <servlet-name>ChangeOrderStatusServlet</servlet-name>
+    <servlet-class>servlets.admin.ChangeOrderStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeOrderStatusServlet</servlet-name>
+    <url-pattern>/admin/change-order-status</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>
