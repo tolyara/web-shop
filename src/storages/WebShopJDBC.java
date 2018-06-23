@@ -1,11 +1,13 @@
 package storages;
 
+import models.Account;
 import models.Order;
 import models.OrderStatus;
 import models.Product;
 import service.Settings;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,10 +33,11 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";
 	private static final String QUERY_SELECT_ALL_ROLES = "select * from account_roles;";
 	private static final String QUERY_SELECT_ALL_ACCOUNTS = "select * from accounts;";
-	private static final String QUERY_INSERT_ORDER = "insert into orders (account_name_fk, status) values (?, ?);";
-	private static final String QUERY_INSERT_INTO_ORDER_PRODUCT = "insert into order_product (order_id, product_id, product_name, product_amount) values (?, ?, ?, ?);";
+	private static final String QUERY_INSERT_ORDER = "insert into orders (account_name_fk, status, total_price) values (?, ?, ?);";
+	private static final String QUERY_INSERT_INTO_ORDER_PRODUCT = "insert into order_product (order_id, product_id, product_name, category_id, manufacturer_name, price, creation_date, colour, size, ordered_amount) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String QUERY_SELECT_ALL_ORDERS = "select * from orders;";
-	private static final String QUERY_SELECT_ALL_ORDER_PRODUCT = "select * from orders_product";
+	private static final String QUERY_SELECT_ALL_ORDER_PRODUCT = "select * from order_product;";
+	private static final String QUERY_UPDATE_ACCOUNT_STATUS = "update accounts as accounts set is_active = ? where accounts.account_name = ?;";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -215,7 +218,13 @@ public class WebShopJDBC implements Storage {
 					 * параметр паролем
 					 */
 					if (rs.getString("account_pass").equals(password)) {
-						authenticationResult = true;
+						/*
+						 * Также нужно, чтобы аккаунт не был заблокирован
+						 */
+						if (rs.getBoolean("is_active") == true) {
+							/* разрешаем вход в систему */
+							authenticationResult = true;
+						}
 					}
 				}
 			}
@@ -233,6 +242,7 @@ public class WebShopJDBC implements Storage {
 				Statement.RETURN_GENERATED_KEYS)) {
 			statement.setString(1, order.getUserLogin());
 			statement.setString(2, order.getStatus().toString());
+			statement.setDouble(3, order.getTotalPrice());
 			statement.executeUpdate();
 			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
@@ -251,7 +261,13 @@ public class WebShopJDBC implements Storage {
 				statement.setInt(1, addedOrderId);
 				statement.setInt(2, product.getId());
 				statement.setString(3, product.getProductName());
-				// statement.setInt(4, product.getAmount());
+				statement.setInt(4, product.getCategoryId());
+				statement.setString(5, product.getManufacturerName());
+				statement.setDouble(6, product.getPrice());
+				statement.setDate(7, (java.sql.Date) product.getCreationDate());
+				statement.setString(8, product.getColour());
+				statement.setString(9, product.getSize());
+				statement.setInt(10, product.getAmount());
 				statement.executeUpdate();
 				statement.clearParameters();
 			}
@@ -272,9 +288,6 @@ public class WebShopJDBC implements Storage {
 
 	@Override
 	public ConcurrentHashMap<Integer, Order> getUserOrders(String login) {
-		// ConcurrentHashMap<Integer, Product> foundedOrderedProducts =
-		// this.getProducts();
-
 		ConcurrentHashMap<Integer, Order> foundedOrders = new ConcurrentHashMap<Integer, Order>();
 		try (final Statement statement = this.connection.createStatement();
 				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDERS)) {
@@ -285,8 +298,10 @@ public class WebShopJDBC implements Storage {
 				 */
 				int orderId = rs.getInt("order_id");
 				if (rs.getString("account_name_fk").equals(login)) {
-					foundedOrders.put(orderId, new Order(orderId, rs.getString("account_name_fk"),
-							this.getOrderedProductsByOrderId(orderId), OrderStatus.recognizeOrderStatus(rs.getString("status"))));
+					foundedOrders.put(orderId,
+							new Order(orderId, rs.getString("account_name_fk"),
+									this.getOrderedProductsByOrderId(orderId),
+									OrderStatus.recognizeOrderStatus(rs.getString("status"))));
 				}
 			}
 		} catch (SQLException e) {
@@ -301,8 +316,7 @@ public class WebShopJDBC implements Storage {
 				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDER_PRODUCT)) {
 			while (rs.next()) {
 				/*
-				 * Сравниваем логины из таблицы БД orders с переданным через параметр логином
-				 * аккаунта
+				 * Сравниваем order_id из таблицы БД orders с переданным через параметр аккаунта
 				 */
 				if (rs.getInt("order_id") == orderId) {
 					foundedOrderedProducts.put(rs.getInt("product_id"),
@@ -316,6 +330,52 @@ public class WebShopJDBC implements Storage {
 			e.printStackTrace();
 		}
 		return foundedOrderedProducts;
+	}
+
+	@Override
+	public ConcurrentHashMap<String, Account> getAccounts() {
+		final ConcurrentHashMap<String, Account> accounts = new ConcurrentHashMap<>();
+		try (final Statement statement = this.connection.createStatement();
+				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ACCOUNTS)) {
+			while (rs.next()) {
+				accounts.put(rs.getString("account_name"),
+						new Account(rs.getString("account_name"), rs.getBoolean("is_active")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return accounts;
+	}
+
+	@Override
+	public void changeAccountStatus(String login, Boolean currentStatus) {
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_UPDATE_ACCOUNT_STATUS)) {
+			/* меняем статус аккаунта на противоположный */
+			statement.setBoolean(1, !currentStatus);
+			statement.setString(2, login);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public ConcurrentHashMap<Integer, Order> getAllOrders() {
+		ConcurrentHashMap<Integer, Order> foundedOrders = new ConcurrentHashMap<Integer, Order>();
+		try (final Statement statement = this.connection.createStatement();
+				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_ORDERS)) {
+			while (rs.next()) {
+				int orderId = rs.getInt("order_id");
+				// if (rs.getString("account_name_fk").equals(login)) {
+				foundedOrders.put(orderId,
+						new Order(orderId, rs.getString("account_name_fk"), this.getOrderedProductsByOrderId(orderId),
+								OrderStatus.recognizeOrderStatus(rs.getString("status"))));
+			}
+			// }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return foundedOrders;
 	}
 
 }

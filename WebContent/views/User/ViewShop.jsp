@@ -12,7 +12,7 @@
 <body>
 
 <h1>Магазин</h1>
-<p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE} <br> <a href="${pageContext.servletContext.contextPath}/user/cabinet?userLogin=${LOGGED_ACCOUNT.login}"> Перейти в личный кабинет для просмотра заказов </a></p> <br>
+<p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE} <br><br> <a href="${pageContext.servletContext.contextPath}/user/cabinet?userLogin=${LOGGED_ACCOUNT.login}"> Перейти в личный кабинет для просмотра заказов </a></p> <br>
 
 
                 <%--Каталог товаров--%>
@@ -74,7 +74,8 @@
                 <td>${bufferProduct.amount}</td>
                 <td>
                 <form action="${pageContext.servletContext.contextPath}/change-products-amount-in-basket" method="POST">
-                	<input type="text" name="newAmount" value="${product.amount}" size="1"><input type="submit" align="center" value="Изменить"/>
+                	<input type="text" name="newAmount" value="${product.amount}" size="1">
+                	<input type="submit" align="center" value="Изменить"/>
                 </form> 
                 </td>               	
                 <td>

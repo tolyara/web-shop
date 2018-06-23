@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import models.Account;
 import models.Order;
 import models.Product;
 
@@ -19,15 +20,6 @@ import models.Product;
 public interface Storage {
 
 	/*
-	 * Методы, формирующие вывод данных на экран в виде таблиц
-	 */
-	ConcurrentMap<Integer, Product> getProducts();
-
-	// Set<Pet> getAllPets();
-
-	// ConcurrentHashMap<Integer, Animalable> getWildAnimals();
-
-	/*
 	 * Метод используется для корректного закрытия соединения с БД
 	 */
 	public void close();
@@ -35,6 +27,8 @@ public interface Storage {
 	/*
 	 * Методы для работы с товарами
 	 */
+	ConcurrentMap<Integer, Product> getProducts();
+	
 	public int addProduct(Product product);
 
 	public int generateProductId();
@@ -54,10 +48,24 @@ public interface Storage {
 	
 	public boolean checkLoginPassword(String login, String password);
 
+	/*
+	 * Методы для работы с заказами
+	 */	
 	public int makeOrder(Order order);
 
 	public int generateOrderId();
 
-	public ConcurrentHashMap<Integer, Order> getUserOrders(String login);	
+	public ConcurrentHashMap<Integer, Order> getUserOrders(String login);
+	
+	public ConcurrentHashMap<Integer, Order> getAllOrders();	
+	
+	/*
+	 * Методы для работы с аккаунтами
+	 */
+	public ConcurrentHashMap<String, Account> getAccounts();
+
+	public void changeAccountStatus(String login, Boolean currentStatus);
+
+	
 
 }

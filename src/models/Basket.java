@@ -56,7 +56,6 @@ public class Basket {
 	public void removeAllBufferProducts() {
 		Iterator<Map.Entry<Integer, Product>> iterator = bufferProducts.entrySet().iterator();
 		while (iterator.hasNext()) {
-			// <Map.Entry<Integer, Product>> product = iterator.next();
 			iterator.next();
 			iterator.remove();
 		}

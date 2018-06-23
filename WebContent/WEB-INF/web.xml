@@ -111,7 +111,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ChangeProductsAmountInBasketServlet</servlet-name>
-    <url-pattern>/change-products-amount-in-basket"</url-pattern>
+    <url-pattern>/change-products-amount-in-basket</url-pattern>
   </servlet-mapping>
   <servlet>
        <servlet-name>CabinetServlet</servlet-name>
@@ -120,6 +120,22 @@
   <servlet-mapping>
     <servlet-name>CabinetServlet</servlet-name>
     <url-pattern>/user/cabinet</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+       <servlet-name>ChangeAccountStatusServlet</servlet-name>
+    <servlet-class>servlets.admin.ChangeAccountStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeAccountStatusServlet</servlet-name>
+    <url-pattern>/admin/change-account-status</url-pattern>
+  </servlet-mapping>
+  <servlet>
+       <servlet-name>ViewOrdersServlet</servlet-name>
+    <servlet-class>servlets.admin.ViewOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewOrdersServlet</servlet-name>
+    <url-pattern>/admin/orders</url-pattern> 
   </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>

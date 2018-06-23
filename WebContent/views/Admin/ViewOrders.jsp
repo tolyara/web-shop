@@ -5,20 +5,20 @@
 
 <html>
 <head>
-<title>Личный кабинет</title>
+<title>Заказы</title>
 <style>
 <%@
 include file ='/css/style.css' 
 %>
 </style>
 </head>
-<body>
+<body class="admin">
 
-	<h1>Личный кабинет</h1>
+	<h1>Заказы</h1>
 	<p>
-		Здесь Вы можете просмотреть свои заказы <br><br> <a
-			href="${pageContext.servletContext.contextPath}/user/view">
-			Вернуться в магазин </a>
+		Здесь Вы можете просмотреть все заказы пользователей <br><br> <a
+			href="${pageContext.servletContext.contextPath}/admin/view">
+			Вернуться в панель управления </a>
 	</p>
 
 	<%-- Список заказов --%>
@@ -28,14 +28,16 @@ include file ='/css/style.css'
 			<caption>Заказы</caption>
 			<tr class="table_head">
 				<td>- ID заказа -</td>
+				<td>- Логин <br> пользователя -</td>
 				<td>- Статус -</td>
 				<td>- Итоговая <br> стоимость -</td>
 				<td>- Данные о товарах -</td>
 			</tr>
 			<%-- В переменной userOrders передаются и ключи, и значения hashmap заказов --%>
-			<c:forEach var="order" items="${userOrders}" varStatus="status">
+			<c:forEach var="order" items="${orders}" varStatus="status">
 				<tr valign="top">
 					<td>${order.value.id}</td>
+					<td>${order.value.userLogin}</td>
 					<td>${order.value.status}</td>
 					<td>${order.value.totalPrice}</td>
 					<td>

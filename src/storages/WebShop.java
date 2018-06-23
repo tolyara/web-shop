@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import models.Order;
 import models.Product;
 
 /**
@@ -136,6 +137,24 @@ public class WebShop implements Storage {
 	public boolean checkLoginPassword(String login, String password) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int makeOrder(Order order) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int generateOrderId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ConcurrentHashMap<Integer, Order> getUserOrders(String login) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

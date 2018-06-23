@@ -29,6 +29,7 @@ public class ViewAdminPanelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("products", SHOP_WEB.getProducts().values());
+        req.setAttribute("accounts", SHOP_WEB.getAccounts().values());
         String loggedAccount = ((Account) req.getSession().getAttribute("LOGGED_ACCOUNT")).getLogin(); 
         req.setAttribute("LOGGED_ACCOUNT", loggedAccount);
         String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE"); 

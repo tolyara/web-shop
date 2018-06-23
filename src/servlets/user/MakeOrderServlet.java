@@ -39,8 +39,8 @@ public class MakeOrderServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
         SHOP_WEB.makeOrder(new Order(SHOP_WEB.generateOrderId(), req.getParameter("userLogin"), BASKET.getBufferProducts(), OrderStatus.REGISTERED));
+        /* Очищаем корзину */
         BASKET.removeAllBufferProducts();
-//        SHOP_WEB.addProduct(new Product(SHOP_WEB.generateProductId(), req.getParameter("productname")));
         resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUSER_PATH));
     }
 

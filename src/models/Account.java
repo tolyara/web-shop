@@ -17,6 +17,11 @@ public class Account {
 		this.login = login;
 	}
 
+	public Account(String login, boolean isActive) {
+		this.login = login;
+		this.isActive = isActive;
+	}
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
@@ -25,7 +30,14 @@ public class Account {
 		return login;
 	}
 
-	public boolean isActive() {
+	// public String isActive() {
+	// if (isActive)
+	// return "Активен";
+	// else
+	// return "Заблокирован";
+	// }
+
+	public boolean getIsActive() {
 		return isActive;
 	}
 
