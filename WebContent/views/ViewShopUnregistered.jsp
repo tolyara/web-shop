@@ -17,21 +17,24 @@
                 <%--Каталог товаров--%>
 
 <div class="products">
-<table border="1">
+<table border="1" id="grid">
     <caption> Каталог товаров </caption>
+    <thead>
     <tr class="table_head">
-        <td> - ID - </td>
-        <td> - Наименование - </td>
-        <td> - Категория - </td>
-        <td> - Производитель - </td>
-        <td> - Цена - </td>
-        <td> - Дата изготовления - </td>
-        <td> - Цвет - </td>
-        <td> - Размер - </td>
-        <td> - Количество <br> на складе - </td>
-        <td> - Действия - </td>
+        <th> - ID - </th>
+        <th class="th_productName" data-type="string"> - Наименование - </th>
+        <th> - Категория - </th>
+        <th> - Производитель - </th>
+        <th class="th_price" data-type="number"> - Цена - </th>
+        <th> - Дата изготовления - </th>
+        <th> - Цвет - </th>
+        <th> - Размер - </th>
+        <th> - Количество <br> на складе - </th>
+        <th> - Действия - </th>
     </tr>
+    </thead>
     <%-- В переменной products передаются только значения hashmap товаров --%>
+    <tbody>
     <c:forEach var="product" items="${products}" varStatus="status">
         <tr valign="top">
             <td>${product.id}</td>
@@ -48,6 +51,7 @@
             </td>
         </tr>
     </c:forEach>
+    </tbody>
 </table> <br>
 <a href="${pageContext.servletContext.contextPath}/"> На главную </a> <p> </p>
 </div>
@@ -81,7 +85,8 @@
 </div>
 
 <%--Данный скрипт взят и "допилен" под нужды проекта с ресурса http://plnkr.co/edit/im9GDgRDAHMGORMXeSvU?p=preview--%>
-<script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
     // сортировка таблицы
     // использовать делегирование!
     // должно быть масштабируемо:

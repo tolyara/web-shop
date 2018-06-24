@@ -4,13 +4,17 @@ body {
     white-space:nowrap;
 }
 
-.th_petName:hover, .th_petOwner:hover  {
+.th_productName:hover, .th_price:hover  {
     background: grey;
     cursor: pointer;
 }
 
-.th_petName, .th_petOwner {
+.th_productName, .th_price {
     cursor: pointer;
+}
+
+.table_head {
+    font-weight: bold;
 }
 
 th, td {

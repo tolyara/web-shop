@@ -43,7 +43,7 @@ public class ViewShopServlet extends HttpServlet {
 		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
 		req.setAttribute("ACCOUNT_ROLE", accountRole);
 		RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_JSP);
-		dispatcher.forward(req, resp); 
+		dispatcher.forward(req, resp);
 	}
 
 	// @Override
