@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import models.Account;
 import models.Order;
 import models.Product;
 
@@ -59,7 +60,7 @@ public class WebShop implements Storage {
 		return products.get(id);
 	}
 
-	@Override
+//	@Override
 	public void editProduct(int id, String newProductName) {
 		// clients.get(id).setSurname(newSurname);
 		products.get(id).setProductName(newProductName);
@@ -155,6 +156,37 @@ public class WebShop implements Storage {
 	public ConcurrentHashMap<Integer, Order> getUserOrders(String login) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void editProduct(int id, String newProductName, int newCategoryId, String newManufacturerName,
+			Double newPrice, Date newDate, String newColour, String newSize, int newAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ConcurrentHashMap<Integer, Order> getAllOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void changeOrderStatus(int orderId, String newOrderStatus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ConcurrentHashMap<String, Account> getAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void changeAccountStatus(String login, Boolean currentStatus) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

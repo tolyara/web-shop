@@ -21,13 +21,13 @@
                 <tr>
             <td align="right"> Введите категорию : </td>
             <td>
-                <input type="text" name="category_id_fk" value="111">
+                <input type="text" name="category_id_fk" value="1">
             </td>
         </tr>
                 <tr>
             <td align="right"> Введите производителя : </td>
             <td>
-                <input type="text" name="manufacturer_name_fk" value="test">
+                <input type="text" name="manufacturer_name_fk" value="TEST">
             </td>
         </tr>
                 <tr>
@@ -39,8 +39,9 @@
                 <tr>
             <td align="right"> Введите дату изготовления : </td>
             <td>
-                <input type="text" name="creation_date" value="1.01.2011">
+                <input type="text" name="creation_date" value="2011.01.01">
             </td>
+            <td align="right"> Формат даты - yyyy.MM.dd </td>
         </tr>
                 <tr>
             <td align="right"> Введите цвет : </td>
@@ -70,6 +71,9 @@
         </tr>
     </table>
 </form>
+
+<a href="${pageContext.servletContext.contextPath}/admin/view">
+		Вернуться </a>
 
 </body>
 </html>

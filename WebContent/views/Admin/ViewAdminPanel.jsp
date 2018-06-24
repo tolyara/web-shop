@@ -89,6 +89,7 @@ include file ='/css/style.css'
 			</c:forEach>
 		</table>
 		<br>
+		<p style="margin-left: 50px;">true - активен, false - заблокирован</p>
 		<p>  </p>
     	<p style="margin-left: 50px;"> Внимание! Изменение статуса на <br> противоположный происходит автоматически, <br> без подтверждения.
         </p>

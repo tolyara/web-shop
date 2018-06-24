@@ -2,6 +2,7 @@ package storages;
 
 import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +38,7 @@ public interface Storage {
 
 	public void deleteProduct(int id);
 
-	public void editProduct(int id, String newProductName);
+	public void editProduct(int id, String newProductName, int newCategoryId, String newManufacturerName, Double newPrice, Date newDate, String newColour, String newSize, int newAmount);
 
 	Product getProductByProductName(String productName);
 

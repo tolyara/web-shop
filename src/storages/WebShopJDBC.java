@@ -28,8 +28,15 @@ public class WebShopJDBC implements Storage {
 
 	private Connection connection;
 	private static final String QUERY_SELECT_ALL_PRODUCTS = "select * from products order by product_id;";
-	private static final String QUERY_INSERT_PRODUCT = "insert into products (product_name, category_id, manufacturer_name, price, creation_date, colour, size, ordered_amount) values (?, ?, ?, ?, ?, ?, ?, ?);";
-	private static final String QUERY_UPDATE_PRODUCT = "update products as products set product_name = ? where products.product_id = ?;";
+	private static final String QUERY_INSERT_PRODUCT = "insert into products (product_name, category_id_fk, manufacturer_name_fk, price, creation_date, colour, size, amount_in_storage) values (?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String QUERY_UPDATE_PRODUCT = "update products as products set product_name = ? where products.product_id = ?;"
+			+ "update products as products set category_id_fk = ? where products.product_id = ?;"
+			+ "update products as products set manufacturer_name_fk = ? where products.product_id = ?;"
+			+ "update products as products set price = ? where products.product_id = ?;"
+			+ "update products as products set creation_date = ? where products.product_id = ?;"
+			+ "update products as products set colour = ? where products.product_id = ?;"
+			+ "update products as products set size = ? where products.product_id = ?;"
+			+ "update products as products set amount_in_storage = ? where products.product_id = ?;";
 	private static final String QUERY_DELETE_PRODUCT = "delete from products as products where products.product_id = ?;";
 	private static final String QUERY_SELECT_ALL_ROLES = "select * from account_roles;";
 	private static final String QUERY_SELECT_ALL_ACCOUNTS = "select * from accounts;";
@@ -82,9 +89,7 @@ public class WebShopJDBC implements Storage {
 								rs.getString("manufacturer_name_fk"), rs.getDouble("price"),
 								rs.getDate("creation_date"), rs.getString("colour"), rs.getString("size"),
 								rs.getInt("amount_in_storage")));
-				// products.put(rs.getInt("product_id"),
-				// new Product(rs.getInt("product_id"), rs.getString("product_name"),
-				// rs.getInt("category_id_fk")));
+				;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -140,10 +145,26 @@ public class WebShopJDBC implements Storage {
 	}
 
 	@Override
-	public void editProduct(int id, String newProductName) {
+	public void editProduct(int id, String newProductName, int newCategoryId, String newManufacturerName,
+			Double newPrice, java.util.Date newDate, String newColour, String newSize, int newAmount) {
+		// TODO Auto-generated method stub
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_UPDATE_PRODUCT)) {
 			statement.setString(1, newProductName);
 			statement.setInt(2, id);
+			statement.setInt(3, newCategoryId);
+			statement.setInt(4, id);
+			statement.setString(5, newManufacturerName);
+			statement.setInt(6, id);
+			statement.setDouble(7, newPrice);
+			statement.setInt(8, id);
+			statement.setDate(9, (java.sql.Date) newDate);
+			statement.setInt(10, id);
+			statement.setString(11, newColour);
+			statement.setInt(12, id);
+			statement.setString(13, newSize);
+			statement.setInt(14, id);
+			statement.setInt(15, newAmount);
+			statement.setInt(16, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -262,7 +283,6 @@ public class WebShopJDBC implements Storage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// System.out.println(addedOrderId);
 		/* Затем добавляем информацию в таблицу order_product */
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_INTO_ORDER_PRODUCT)) {
 			for (Product product : order.getOrderedProducts().values()) {
@@ -387,10 +407,6 @@ public class WebShopJDBC implements Storage {
 
 	@Override
 	public void changeOrderStatus(int orderId, String newOrderStatus) {
-		// ConcurrentHashMap<Integer, Order> foundedOrders = this.getAllOrders();
-		// for (Order order : foundedOrders.values()) {
-		// /* находим заказ по id */
-		// if (order.getId() == orderId) {
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_UPDATE_ORDER_STATUS)) {
 			/* меняем статус заказа */
 			statement.setString(1, OrderStatus.recognizeOrderStatus(newOrderStatus).toString());
