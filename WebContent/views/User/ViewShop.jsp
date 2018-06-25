@@ -27,7 +27,7 @@
         <th> - Категория - </th>
         <th> - Производитель - </th>
         <th class="th_price" data-type="number"> - Цена - </th>
-        <th> - Дата изготовления - </th>
+        <th class="th_creation_date" data-type="string"> - Дата изготовления - </th>
         <th> - Цвет - </th>
         <th> - Размер - </th>
         <th> - Количество <br> на складе - </th>
@@ -77,13 +77,12 @@
                 <td>${bufferProduct.productName}</td>
                 <td>${bufferProduct.amount}</td>
                 <td>
-                <form action="${pageContext.servletContext.contextPath}/change-products-amount-in-basket" method="POST">
-                	<input type="text" name="newAmount" value="${product.amount}" size="1">
+                <form action="${pageContext.servletContext.contextPath}/change-products-amount-in-basket?bufferProductId=${bufferProduct.id}" method="POST">
+                	<input type="text" name="newAmount" size="1">
                 	<input type="submit" align="center" value="Изменить"/>
                 </form> 
                 </td>               	
                 <td>
-                	<%-- <a href="${pageContext.servletContext.contextPath}/change-products-amount-in-basket?productId=${bufferProduct.id}"> Изменить </a><br> --%>                
                     <a href="${pageContext.servletContext.contextPath}/remove-from-basket?productId=${bufferProduct.id}"> Удалить </a><br>
                 </td>
             </tr>

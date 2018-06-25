@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import models.Account;
 import models.Product;
 import service.DateParserUtil;
 import service.StorageIdentifier;
@@ -18,11 +19,11 @@ import storages.Storage;
  * 
  * @author AnatoliiMelchenko
  */
-public class CreateProductServlet extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEWADMIN_PATH = "/admin/view";  
-	private static final String CREATEPRODUCT_JSP = "/views/Admin/CreateProduct.jsp";
+	private static final String CREATEPRODUCT_JSP = "/views/Admin/CreateUser.jsp";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 
 	@Override
@@ -30,10 +31,7 @@ public class CreateProductServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		try {
-			SHOP_WEB.addProduct(new Product(SHOP_WEB.generateProductId(), req.getParameter("productname"),
-					Integer.valueOf(req.getParameter("category_id_fk")), req.getParameter("manufacturer_name_fk"),
-					Double.valueOf(req.getParameter("price")), DateParserUtil.recognizeSqlDate(req.getParameter("creation_date")), req.getParameter("colour"),
-					(req.getParameter("size")), Integer.valueOf(req.getParameter("amount_in_storage"))));
+			SHOP_WEB.addAccount(req.getParameter("role"), new Account(req.getParameter("accountName"), req.getParameter("accountPass")));
 			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWADMIN_PATH));
 		} catch (Exception e) {
 			resp.sendRedirect(String.format("%s%s", req.getContextPath(), CREATEPRODUCT_JSP));

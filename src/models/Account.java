@@ -6,6 +6,7 @@ public class Account {
 
 	/* Уникальный логин аккаунта */
 	private String login;
+	private String password;
 
 	/*
 	 * Статус аккаунта, если true - активен, false - заблокирован, по умолчанию все
@@ -21,6 +22,14 @@ public class Account {
 		this.login = login;
 		this.isActive = isActive;
 	}
+	
+	
+
+	public Account(String login, String password) {
+		super();
+		this.login = login;
+		this.password = password;
+	}
 
 	public void setLogin(String login) {
 		this.login = login;
@@ -30,19 +39,20 @@ public class Account {
 		return login;
 	}
 
-	// public String isActive() {
-	// if (isActive)
-	// return "Активен";
-	// else
-	// return "Заблокирован";
-	// }
-
 	public boolean getIsActive() {
 		return isActive;
 	}
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

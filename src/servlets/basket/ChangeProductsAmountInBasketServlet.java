@@ -20,27 +20,26 @@ public class ChangeProductsAmountInBasketServlet extends HttpServlet {
 	private static final String VIEWUNREGISTERED_PATH = "/unregistered";
 	private static final Basket BASKET = Basket.getInstance();
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		doPost(req, resp);
-	}
-	
 //	@Override
-//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		// BASKET.deleteProduct(Integer.valueOf(req.getParameter("productId")));
-//		BASKET.changeProductAmount(Integer.valueOf(req.getParameter("productId")),
-//				Integer.valueOf(req.getParameter("newAmpunt")));
-//		/*
-//		 * Проверяем, залогинен ли пользователь, для того чтобы сделать корректный
-//		 * редирект
-//		 */
-//		Account loggedAccount = (Account) req.getSession().getAttribute("LOGGED_ACCOUNT");
-//		if (loggedAccount != null) {
-//			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUSER_PATH));
-//		} else {
-//			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUNREGISTERED_PATH));
-//		}
+//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+////		doPost(req, resp);
 //	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		BASKET.changeProductAmount(Integer.valueOf(req.getParameter("bufferProductId")),
+				Integer.valueOf(req.getParameter("newAmount"))); 
+		/*
+		 * Проверяем, залогинен ли пользователь, для того чтобы сделать корректный
+		 * редирект
+		 */
+		Account loggedAccount = (Account) req.getSession().getAttribute("LOGGED_ACCOUNT");
+		if (loggedAccount != null) {
+			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUSER_PATH));
+		} else {
+			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUNREGISTERED_PATH));
+		}
+	}
 
 }
  

@@ -53,7 +53,7 @@ include file ='/css/style.css'
 								</select>
 							</p>
 							<p>
-								<input type="submit" value="Отправить">
+								<input type="submit" value="Изменить">
 							</p>
 						</form>
 					<td>${order.value.totalPrice}</td>

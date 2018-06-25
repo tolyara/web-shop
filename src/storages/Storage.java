@@ -69,4 +69,6 @@ public interface Storage {
 
 	public void changeAccountStatus(String login, Boolean currentStatus);
 
+	public void addAccount(String role, Account account);
+
 }

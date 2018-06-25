@@ -46,6 +46,8 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_SELECT_ALL_ORDER_PRODUCT = "select * from order_product;";
 	private static final String QUERY_UPDATE_ACCOUNT_STATUS = "update accounts as accounts set is_active = ? where accounts.account_name = ?;";
 	private static final String QUERY_UPDATE_ORDER_STATUS = "update orders as orders set status = ? where orders.order_id = ?;";
+	private static final String QUERY_INSERT_ACCOUNT = "insert into accounts (account_name, account_pass, is_active) values (?, ?, ?);"
+			+ "insert into account_roles (account_name_fk, role_name) values (?, ?);";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -411,6 +413,22 @@ public class WebShopJDBC implements Storage {
 			/* меняем статус заказа */
 			statement.setString(1, OrderStatus.recognizeOrderStatus(newOrderStatus).toString());
 			statement.setInt(2, orderId);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addAccount(String role, Account account) {
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_ACCOUNT)) {
+			/* для таблицы accounts */
+			statement.setString(1, account.getLogin());
+			statement.setString(2, account.getPassword());
+			statement.setBoolean(3, account.getIsActive());
+			/* для таблицы account_roles*/
+			statement.setString(4, account.getLogin());
+			statement.setString(5, role);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

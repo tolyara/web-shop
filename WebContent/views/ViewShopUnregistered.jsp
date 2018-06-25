@@ -26,7 +26,7 @@
         <th> - Категория - </th>
         <th> - Производитель - </th>
         <th class="th_price" data-type="number"> - Цена - </th>
-        <th> - Дата изготовления - </th>
+        <th class="th_creation_date" data-type="string"> - Дата изготовления - </th>
         <th> - Цвет - </th>
         <th> - Размер - </th>
         <th> - Количество <br> на складе - </th>

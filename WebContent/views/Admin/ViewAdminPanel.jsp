@@ -29,7 +29,7 @@ include file ='/css/style.css'
 				<th>- Категория -</th>
 				<th>- Производитель -</th>
 				<th class="th_price" data-type="number">- Цена -</th>
-				<th>- Дата изготовления -</th>
+				<th class="th_creation_date" data-type="string">- Дата изготовления -</th>
 				<th>- Цвет -</th>
 				<th>- Размер -</th>
 				<th>- Количество <br> на складе -
@@ -59,7 +59,7 @@ include file ='/css/style.css'
 			</c:forEach>
 			</tbody>
 		</table>
-		<a
+		<a class="link"
 			href="${pageContext.servletContext.contextPath}/views/Admin/CreateProduct.jsp">
 			Добавить товар </a> <br> <br> <br> <br>
 		<form action="${pageContext.servletContext.contextPath}/logout"
@@ -88,6 +88,9 @@ include file ='/css/style.css'
 				</tr>
 			</c:forEach>
 		</table>
+		<a class="link"
+			href="${pageContext.servletContext.contextPath}/views/Admin/CreateUser.jsp">
+			Добавить аккаунт </a>
 		<br>
 		<p style="margin-left: 50px;">true - активен, false - заблокирован</p>
 		<p>  </p>

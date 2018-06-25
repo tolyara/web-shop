@@ -25,7 +25,8 @@ public class AddToBasketServlet extends HttpServlet {
 		Product productForAdd = SHOP_WEB.getProductById(Integer.valueOf(req.getParameter("productId")));
 		BASKET.addToBasket(productForAdd);
 		/*
-		 * Проверяем, залогинен ли пользователь, для того чтобы сделать корректный редирект 
+		 * Проверяем, залогинен ли пользователь, для того чтобы сделать корректный
+		 * редирект
 		 */
 		Account loggedAccount = (Account) req.getSession().getAttribute("LOGGED_ACCOUNT");
 		if (loggedAccount != null) {
@@ -34,5 +35,4 @@ public class AddToBasketServlet extends HttpServlet {
 			resp.sendRedirect(String.format("%s%s", req.getContextPath(), VIEWUNREGISTERED_PATH));
 		}
 	}
-
 }

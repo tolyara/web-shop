@@ -145,6 +145,14 @@
     <servlet-name>ChangeOrderStatusServlet</servlet-name>
     <url-pattern>/admin/change-order-status</url-pattern>
   </servlet-mapping>
+  <servlet>
+       <servlet-name>CreateUserServlet</servlet-name>
+    <servlet-class>servlets.admin.CreateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateUserServlet</servlet-name>
+    <url-pattern>/admin/create-user</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>

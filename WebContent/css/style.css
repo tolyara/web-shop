@@ -4,12 +4,12 @@ body {
     white-space:nowrap;
 }
 
-.th_productName:hover, .th_price:hover  {
+.th_productName:hover, .th_price:hover, .th_creation_date:hover {
     background: grey;
     cursor: pointer;
 }
 
-.th_productName, .th_price {
+.th_productName, .th_price, .th_creation_date {
     cursor: pointer;
 }
 
@@ -47,7 +47,7 @@ a {
     margin: 6px;
 }
 
-.link-make-order {
+.link {
     margin-left: 50px;
     padding-bottom: 20px;
 }
