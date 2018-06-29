@@ -28,7 +28,7 @@ public class ViewShopServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L; 
 	private static final String VIEWSHOP_JSP = "/views/User/ViewShop.jsp";
-	private static final String VIEWSHOP_PATH = "/user/view";
+//	private static final String VIEWSHOP_PATH = "/user/view";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 	private static final Basket BASKET = Basket.getInstance();
 
@@ -42,20 +42,13 @@ public class ViewShopServlet extends HttpServlet {
 		req.setAttribute("LOGGED_ACCOUNT", loggedAccount);
 		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
 		req.setAttribute("ACCOUNT_ROLE", accountRole);
+//		final String ERROR_PRODUCT_AMOUNT = (String) req.getSession().getAttribute("ERROR_PRODUCT_AMOUNT");
+//		req.setAttribute("ERROR_PRODUCT_AMOUNT", accountRole);
 		RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_JSP);
-		dispatcher.forward(req, resp);
+		dispatcher.forward(req, resp); 
+		/* Очищаем строку в сессии, выводящую сообщения об ошибке */
+		req.getSession().setAttribute("ERROR_PRODUCT_AMOUNT", "");
 	}
-
-	// @Override
-	// protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-	// throws ServletException, IOException {
-	// req.setCharacterEncoding("UTF-8");
-	// resp.setContentType("text/html; charset=UTF-8");
-	//// SHOP_WEB.editProduct(Integer.valueOf(req.getParameter("id")),
-	// req.getParameter("productname"));
-	// resp.sendRedirect(String.format("%s%s", req.getContextPath(),
-	// VIEWSHOP_PATH));
-	// }
 
 	/*
 	 * В случае использования данных из БД через JDBC этот метод нужен для

@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="/WEB-INF/HelloworldTag.tld" prefix="customtag"%>
 
 <html>
 <head>
@@ -12,6 +13,8 @@
 		Войти в систему как пользователь или администратор </a> <br> <br>
 	<a href="${pageContext.servletContext.contextPath}/unregistered">
 		Перейти к просмотру товаров как незарегистрированный пользователь </a>
+		
+	<!--<p><customtag: helloworld /><p>-->
 
 </body>
 </html>

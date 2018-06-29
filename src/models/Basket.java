@@ -14,6 +14,8 @@ public class Basket {
 	 * Корзина товаров
 	 */
 	private ConcurrentHashMap<Integer, Product> bufferProducts;
+	
+	private static final String ERROR_PRODUCT_AMOUNT_NEGATIVE_VALUE = "Количество не может быть отрицательным.";
 
 	private Basket() {
 		bufferProducts = new ConcurrentHashMap<>();
@@ -50,7 +52,7 @@ public class Basket {
 
 	/* Удалить товар из корзины. */
 	public void removeProduct(int id) {
-		bufferProducts.remove(id); 
+		bufferProducts.remove(id);
 	}
 
 	public void removeAllBufferProducts() {
@@ -61,8 +63,16 @@ public class Basket {
 		}
 	}
 
+	/*
+	 * Изменить количество единиц товара в корзине. Метод выполнится, только если
+	 * новое количество больше нуля.
+	 */
 	public void changeProductAmount(int id, int newAmount) {
-		bufferProducts.get(id).setAmount(newAmount);		
+		if (newAmount > 0) {
+			bufferProducts.get(id).setAmount(newAmount);
+		} else {
+			throw new NumberFormatException(ERROR_PRODUCT_AMOUNT_NEGATIVE_VALUE);
+		}
 	}
 
 }

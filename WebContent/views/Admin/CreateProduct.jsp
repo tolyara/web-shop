@@ -9,6 +9,7 @@
 <body>
 
 <h1>Добавление новой позиции товара</h1> <br>
+<p align="center" style="color: red;"> ${ERROR_PRODUCT_CREATE} </p>
 
 <form action="${pageContext.servletContext.contextPath}/admin/create-product" method="POST">
     <table>
@@ -35,6 +36,7 @@
             <td>
                 <input type="text" name="price" value="111">
             </td>
+            <td align="right"> Данное поле не может быть меньше 0 </td>
         </tr>
                 <tr>
             <td align="right"> Введите дату изготовления : </td>
@@ -60,6 +62,7 @@
             <td>
                 <input type="text" name="amount_in_storage" value="111">
             </td>
+            <td align="right"> Данное поле не может быть меньше 0 </td>
         </tr> 
         <tr> 
         	<td>...</td>

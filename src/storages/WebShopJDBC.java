@@ -48,6 +48,7 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_UPDATE_ORDER_STATUS = "update orders as orders set status = ? where orders.order_id = ?;";
 	private static final String QUERY_INSERT_ACCOUNT = "insert into accounts (account_name, account_pass, is_active) values (?, ?, ?);"
 			+ "insert into account_roles (account_name_fk, role_name) values (?, ?);";
+	private static final String ERROR_PRODUCT_CREATE_NEGATIVE_VALUE = "Цена/количество не может быть отрицательным.";
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
@@ -104,29 +105,33 @@ public class WebShopJDBC implements Storage {
 
 	@Override
 	public int addProduct(Product product) {
-		int addedProductId = -1;
-		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
-				Statement.RETURN_GENERATED_KEYS)) {
-			statement.setString(1, product.getProductName());
-			statement.setInt(2, product.getCategoryId());
-			statement.setString(3, product.getManufacturerName());
-			statement.setDouble(4, product.getPrice());
-			statement.setDate(5, (java.sql.Date) product.getCreationDate());
-			statement.setString(6, product.getColour());
-			statement.setString(7, product.getSize());
-			statement.setInt(8, product.getAmount());
-			statement.executeUpdate();
-			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-				if (generatedKeys.next()) {
-					addedProductId = generatedKeys.getInt(1);
-				} else {
-					throw new IllegalStateException("Could not add new product to DB!");
+//		if (product.getPrice() > 0 || product.getAmount() > 0) {
+			int addedProductId = -1;
+			try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
+					Statement.RETURN_GENERATED_KEYS)) {
+				statement.setString(1, product.getProductName());
+				statement.setInt(2, product.getCategoryId());
+				statement.setString(3, product.getManufacturerName());
+				statement.setDouble(4, product.getPrice());
+				statement.setDate(5, (java.sql.Date) product.getCreationDate());
+				statement.setString(6, product.getColour());
+				statement.setString(7, product.getSize());
+				statement.setInt(8, product.getAmount());
+				statement.executeUpdate();
+				try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						addedProductId = generatedKeys.getInt(1);
+					} else {
+						throw new IllegalStateException("Could not add new product to DB!");
+					}
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return addedProductId;
+			return addedProductId;
+//		} else {
+//			throw new NumberFormatException(ERROR_PRODUCT_CREATE_NEGATIVE_VALUE);
+//		}
 	}
 
 	/*
@@ -426,7 +431,7 @@ public class WebShopJDBC implements Storage {
 			statement.setString(1, account.getLogin());
 			statement.setString(2, account.getPassword());
 			statement.setBoolean(3, account.getIsActive());
-			/* для таблицы account_roles*/
+			/* для таблицы account_roles */
 			statement.setString(4, account.getLogin());
 			statement.setString(5, role);
 			statement.executeUpdate();

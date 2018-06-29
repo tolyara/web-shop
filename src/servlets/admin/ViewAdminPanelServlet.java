@@ -36,6 +36,8 @@ public class ViewAdminPanelServlet extends HttpServlet {
         req.setAttribute("ACCOUNT_ROLE", accountRole);
         RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWADMIN_PATH);
         dispatcher.forward(req, resp);
+        /* Очищаем строку в сессии, выводящую сообщения об ошибке */
+//        req.getSession().setAttribute("ERROR_PRODUCT_CREATE", "");
     }
 
     /*

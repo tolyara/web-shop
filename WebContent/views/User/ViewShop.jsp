@@ -12,6 +12,7 @@
 <body class="user">
 
 <h1>Магазин</h1>
+<p class="error"> ${ERROR_PRODUCT_AMOUNT} </p>
 <p>Вы вошли под логином ${LOGGED_ACCOUNT.login}, роль ${ACCOUNT_ROLE} <br><br> <a href="${pageContext.servletContext.contextPath}/user/cabinet?userLogin=${LOGGED_ACCOUNT.login}"> Перейти в личный кабинет для просмотра заказов </a></p> <br>
 
 
@@ -88,7 +89,7 @@
             </tr>
         </c:forEach>
     </table> <br>
-    <a class="link-make-order" href="${pageContext.servletContext.contextPath}/user/make-order?userLogin=${LOGGED_ACCOUNT.login}"> Оформить заказ </a> <br>
+    <a class="link" href="${pageContext.servletContext.contextPath}/user/make-order?userLogin=${LOGGED_ACCOUNT.login}"> Оформить заказ </a> <br>
     <p>  </p>
     <p style="margin-left: 50px;"> Внимание! Удаление товара(-ов) из <br> корзины происходит автоматически, без <br> подтверждения.
         </p>

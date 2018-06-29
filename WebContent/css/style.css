@@ -87,4 +87,8 @@ a {
     width: auto;
 }
 
+.error {
+    text-align: center;
+    color: red;
+}
 
