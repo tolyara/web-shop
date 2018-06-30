@@ -47,7 +47,7 @@ a {
     margin: 6px;
 }
 
-.link {
+.link, .paragraph {
     margin-left: 50px;
     padding-bottom: 20px;
 }
@@ -72,6 +72,8 @@ a {
 
 .user {
     overflow: auto;
+    width: auto;
+    height: auto;    
 }
 
 .orders {
@@ -90,5 +92,13 @@ a {
 .error {
     text-align: center;
     color: red;
+}
+
+.foundedProducts {
+    float: left;
+    background: #d3d3eb;
+    margin-bottom: 20px;
+    width: auto;
+    height: auto;
 }
 

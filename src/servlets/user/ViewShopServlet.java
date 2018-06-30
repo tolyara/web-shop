@@ -28,7 +28,6 @@ public class ViewShopServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L; 
 	private static final String VIEWSHOP_JSP = "/views/User/ViewShop.jsp";
-//	private static final String VIEWSHOP_PATH = "/user/view";
 	private static final Storage SHOP_WEB = StorageIdentifier.getStorage();
 	private static final Basket BASKET = Basket.getInstance();
 
@@ -38,16 +37,17 @@ public class ViewShopServlet extends HttpServlet {
 		req.setAttribute("products", SHOP_WEB.getProducts().values());
 		/* Товары в корзине */
 		req.setAttribute("bufferProducts", BASKET.getBufferProducts().values());
+		/* Список всех производителей */
+		req.setAttribute("manufacturers", SHOP_WEB.getManufacturers().values());
 		Account loggedAccount = ((Account) req.getSession().getAttribute("LOGGED_ACCOUNT"));
 		req.setAttribute("LOGGED_ACCOUNT", loggedAccount);
 		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
 		req.setAttribute("ACCOUNT_ROLE", accountRole);
-//		final String ERROR_PRODUCT_AMOUNT = (String) req.getSession().getAttribute("ERROR_PRODUCT_AMOUNT");
-//		req.setAttribute("ERROR_PRODUCT_AMOUNT", accountRole);
 		RequestDispatcher dispatcher = req.getRequestDispatcher(VIEWSHOP_JSP);
 		dispatcher.forward(req, resp); 
 		/* Очищаем строку в сессии, выводящую сообщения об ошибке */
 		req.getSession().setAttribute("ERROR_PRODUCT_AMOUNT", "");
+		req.getSession().setAttribute("ERROR_EMPTY_BASKET", ""); 
 	}
 
 	/*

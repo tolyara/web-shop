@@ -83,7 +83,12 @@ include file ='/css/style.css'
 			<c:forEach var="account" items="${accounts}" varStatus="status">
 				<tr valign="top">
 					<td>${account.login}</td>
-					<td>${account.isActive}</td>
+					<c:if test="${account.isActive == true}">
+					<td style="color: green; width: 100px;">активен</td>
+					</c:if>
+					<c:if test="${account.isActive == false}">
+					<td style="color: red; width: 100px;">заблокирован</td>
+					</c:if>
 					<td><a href="${pageContext.servletContext.contextPath}/admin/change-account-status?login=${account.login}&currentStatus=${account.isActive}"> Изменить <br> статус </a><br></td>
 				</tr>
 			</c:forEach>

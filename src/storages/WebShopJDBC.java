@@ -1,6 +1,7 @@
 package storages;
 
 import models.Account;
+import models.Manufacturer;
 import models.Order;
 import models.OrderStatus;
 import models.Product;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Класс описывает работу магазина, где в качестве хранилища используется база
@@ -48,8 +50,8 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_UPDATE_ORDER_STATUS = "update orders as orders set status = ? where orders.order_id = ?;";
 	private static final String QUERY_INSERT_ACCOUNT = "insert into accounts (account_name, account_pass, is_active) values (?, ?, ?);"
 			+ "insert into account_roles (account_name_fk, role_name) values (?, ?);";
-	private static final String ERROR_PRODUCT_CREATE_NEGATIVE_VALUE = "Цена/количество не может быть отрицательным.";
-
+	private static final String QUERY_SELECT_ALL_MANUFACTURERS = "select * from manufacturers;";
+	
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
 	 * connection pool.
@@ -438,6 +440,22 @@ public class WebShopJDBC implements Storage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ConcurrentMap<String, Manufacturer> getManufacturers() {
+		final ConcurrentHashMap<String, Manufacturer> manufacturers = new ConcurrentHashMap<>();
+		try (final Statement statement = this.connection.createStatement();
+				final ResultSet rs = statement.executeQuery(QUERY_SELECT_ALL_MANUFACTURERS)) {
+			while (rs.next()) {
+				manufacturers.put(rs.getString("manufacturer_name"),
+						new Manufacturer(rs.getString("manufacturer_name")));
+				;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return manufacturers;
 	}
 
 }

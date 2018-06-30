@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import models.Account;
+import models.Manufacturer;
 import models.Order;
 import models.Product;
 
@@ -70,5 +71,8 @@ public interface Storage {
 	public void changeAccountStatus(String login, Boolean currentStatus);
 
 	public void addAccount(String role, Account account);
+
+	/* Другие методы */
+	public ConcurrentMap<String, Manufacturer> getManufacturers();
 
 }
