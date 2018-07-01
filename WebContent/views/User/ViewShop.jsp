@@ -129,7 +129,7 @@ include file ='/css/style.css'
 			<form class="paragraph" action="${pageContext.servletContext.contextPath}/user/find-products"
 			method="POST">
 			производитель - 
-				<select size="5" multiple name="manufacturerName">				
+				<select size="1" name="manufacturerName">				
 					<option selected disabled>Производитель</option>
 					<c:forEach var="manufacturer" items="${manufacturers}" varStatus="status">
 					<option value="${manufacturer.name}">${manufacturer.name}</option>
