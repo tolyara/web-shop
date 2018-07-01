@@ -51,7 +51,8 @@ public class WebShopJDBC implements Storage {
 	private static final String QUERY_INSERT_ACCOUNT = "insert into accounts (account_name, account_pass, is_active) values (?, ?, ?);"
 			+ "insert into account_roles (account_name_fk, role_name) values (?, ?);";
 	private static final String QUERY_SELECT_ALL_MANUFACTURERS = "select * from manufacturers;";
-	
+	private static final String QUERY_FIND_PRODUCTS = "select * from products where manufacturer_name_fk like ? and price >= ? and price <= ? and (colour like ? or colour is null); ";
+
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
 	 * connection pool.
@@ -94,7 +95,6 @@ public class WebShopJDBC implements Storage {
 								rs.getString("manufacturer_name_fk"), rs.getDouble("price"),
 								rs.getDate("creation_date"), rs.getString("colour"), rs.getString("size"),
 								rs.getInt("amount_in_storage")));
-				;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,33 +107,33 @@ public class WebShopJDBC implements Storage {
 
 	@Override
 	public int addProduct(Product product) {
-//		if (product.getPrice() > 0 || product.getAmount() > 0) {
-			int addedProductId = -1;
-			try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
-					Statement.RETURN_GENERATED_KEYS)) {
-				statement.setString(1, product.getProductName());
-				statement.setInt(2, product.getCategoryId());
-				statement.setString(3, product.getManufacturerName());
-				statement.setDouble(4, product.getPrice());
-				statement.setDate(5, (java.sql.Date) product.getCreationDate());
-				statement.setString(6, product.getColour());
-				statement.setString(7, product.getSize());
-				statement.setInt(8, product.getAmount());
-				statement.executeUpdate();
-				try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-					if (generatedKeys.next()) {
-						addedProductId = generatedKeys.getInt(1);
-					} else {
-						throw new IllegalStateException("Could not add new product to DB!");
-					}
+		// if (product.getPrice() > 0 || product.getAmount() > 0) {
+		int addedProductId = -1;
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_INSERT_PRODUCT,
+				Statement.RETURN_GENERATED_KEYS)) {
+			statement.setString(1, product.getProductName());
+			statement.setInt(2, product.getCategoryId());
+			statement.setString(3, product.getManufacturerName());
+			statement.setDouble(4, product.getPrice());
+			statement.setDate(5, (java.sql.Date) product.getCreationDate());
+			statement.setString(6, product.getColour());
+			statement.setString(7, product.getSize());
+			statement.setInt(8, product.getAmount());
+			statement.executeUpdate();
+			try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					addedProductId = generatedKeys.getInt(1);
+				} else {
+					throw new IllegalStateException("Could not add new product to DB!");
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-			return addedProductId;
-//		} else {
-//			throw new NumberFormatException(ERROR_PRODUCT_CREATE_NEGATIVE_VALUE);
-//		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return addedProductId;
+		// } else {
+		// throw new NumberFormatException(ERROR_PRODUCT_CREATE_NEGATIVE_VALUE);
+		// }
 	}
 
 	/*
@@ -156,7 +156,6 @@ public class WebShopJDBC implements Storage {
 	@Override
 	public void editProduct(int id, String newProductName, int newCategoryId, String newManufacturerName,
 			Double newPrice, java.util.Date newDate, String newColour, String newSize, int newAmount) {
-		// TODO Auto-generated method stub
 		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_UPDATE_PRODUCT)) {
 			statement.setString(1, newProductName);
 			statement.setInt(2, id);
@@ -456,6 +455,57 @@ public class WebShopJDBC implements Storage {
 			e.printStackTrace();
 		}
 		return manufacturers;
+	}
+
+	@Override
+	public ConcurrentHashMap<Integer, Product> findProducts(String manufacturerName, String minPrice, String maxPrice,
+			String colour) {
+		final ConcurrentHashMap<Integer, Product> foundedProducts = new ConcurrentHashMap<>();
+		/* Приводим полученные строки в необходимый для работы с БД вид */
+		String manufacturerNameForDB;
+		if (manufacturerName == null || manufacturerName.isEmpty()) {
+			manufacturerNameForDB = "%";
+		} else {
+			manufacturerNameForDB = manufacturerName;
+		}
+		double minPriceForDB;
+		if (minPrice == null || minPrice.isEmpty()) {
+			/* Ставим нижний порог цены 0 */
+			minPriceForDB = 0.0;
+		} else {
+			minPriceForDB = Double.valueOf(minPrice);
+		}
+		double maxPriceForDB;
+		if (maxPrice == null || maxPrice.isEmpty()) {
+			/* Ставим верхний порог цены очень большой, чтобы все товары попадали в выборку */
+			maxPriceForDB = 100_000_000.0;
+		} else {
+			maxPriceForDB = Double.valueOf(maxPrice);
+		}		
+		String colourForDB;
+		if (colour == null || colour.isEmpty()) {
+			colourForDB = "%";
+		}
+		else {
+			colourForDB = colour;
+		}
+		try (final PreparedStatement statement = this.connection.prepareStatement(QUERY_FIND_PRODUCTS)) {
+			statement.setString(1, manufacturerNameForDB);
+			statement.setDouble(2, minPriceForDB);
+			statement.setDouble(3, maxPriceForDB);
+			statement.setString(4, colourForDB);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				foundedProducts.put(rs.getInt("product_id"),
+						new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("category_id_fk"),
+								rs.getString("manufacturer_name_fk"), rs.getDouble("price"),
+								rs.getDate("creation_date"), rs.getString("colour"), rs.getString("size"),
+								rs.getInt("amount_in_storage")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return foundedProducts;
 	}
 
 }

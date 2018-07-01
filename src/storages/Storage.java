@@ -75,4 +75,6 @@ public interface Storage {
 	/* Другие методы */
 	public ConcurrentMap<String, Manufacturer> getManufacturers();
 
+	public ConcurrentHashMap<Integer, Product> findProducts(String manufacturerName, String minPrice, String maxPrice, String colour);
+
 }

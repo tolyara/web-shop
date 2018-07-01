@@ -123,21 +123,21 @@ include file ='/css/style.css'
 	<!-- <p style="position: relative;">Здесь Вы можете найти товары по определенным параметрам <br><br>  -->
 
 	<div class="foundedProducts">
-		<h3 class="paragraph">Поиск товаров</h3>
+		<h3 class="paragraph">Поиск товаров (чувствителен к регистру)</h3>
 		<p class="paragraph">
 			Здесь Вы можете найти товары по определенным параметрам: </p>
 			<form class="paragraph" action="${pageContext.servletContext.contextPath}/user/find-products"
 			method="POST">
 			производитель - 
-				<select size="1" name="manufacturerId">				
+				<select size="5" multiple name="manufacturerName">				
 					<option selected disabled>Производитель</option>
 					<c:forEach var="manufacturer" items="${manufacturers}" varStatus="status">
 					<option value="${manufacturer.name}">${manufacturer.name}</option>
 					</c:forEach> 				
 				</select> 
 			<br>
-			цена от - <input type="text" name="minPrice" size="7"> до - <input type="text" name="maxPrice" size="7"> <br>
-			цвет - <input type="text" name="colour" size="27">	<br> <br>		
+			цена от - <input type="text" name="minPrice" value="" size="7"> до - <input type="text" name="maxPrice" value="" size="7"> <br>
+			цвет - <input type="text" name="colour" value="" size="27">	<br> <br>		
 				<input type="submit" align="center" value="Найти товары">
 			</form>
 		<table border="1" id="grid">

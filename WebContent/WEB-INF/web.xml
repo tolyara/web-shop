@@ -153,6 +153,14 @@
     <servlet-name>CreateUserServlet</servlet-name>
     <url-pattern>/admin/create-user</url-pattern>
   </servlet-mapping>
+  <servlet>
+       <servlet-name>FindProductsServlet</servlet-name>
+    <servlet-class>servlets.user.FindProductsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindProductsServlet</servlet-name>
+    <url-pattern>/user/find-products</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthorizationAdminFilter</filter-name>
     <filter-class>

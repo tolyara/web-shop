@@ -39,6 +39,8 @@ public class ViewShopServlet extends HttpServlet {
 		req.setAttribute("bufferProducts", BASKET.getBufferProducts().values());
 		/* Список всех производителей */
 		req.setAttribute("manufacturers", SHOP_WEB.getManufacturers().values());
+		/* Найденные товары */
+//		req.setAttribute("foundedProducts", SHOP_WEB.getManufacturers().values());
 		Account loggedAccount = ((Account) req.getSession().getAttribute("LOGGED_ACCOUNT"));
 		req.setAttribute("LOGGED_ACCOUNT", loggedAccount);
 		String accountRole = (String) req.getSession().getAttribute("ACCOUNT_ROLE");
