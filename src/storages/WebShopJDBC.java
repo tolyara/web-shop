@@ -55,7 +55,7 @@ public class WebShopJDBC implements Storage {
 
 	/*
 	 * Default constructor is used if we want to use JDBC connection through Tomcat
-	 * connection pool.
+	 * connection pool. 
 	 */
 	public WebShopJDBC() {
 		this.connection = ConnectionPool.getInstance().getConnection();
