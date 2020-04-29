@@ -27,17 +27,17 @@ public class ConnectionPool {
 	}
 
 	public Connection getConnection() {
-		Context ctx;
-		Connection c = null;
+		Context context;
+		Connection connection = null;
 		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tomcat_connection_pool");
-			c = ds.getConnection();
+			context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/tomcat_connection_pool");
+			connection = dataSource.getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return connection;
 	}
 }
